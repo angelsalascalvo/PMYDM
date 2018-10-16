@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">CalculadoraASC</string>
+    /* IDIOMA ESPAÑOL */
+    <string name="sEtitulo">Calculadora</string>
+    <string name="sEop1">Primer Operando</string>
+    <string name="sEop2">Segundo Operando</string>
+    <string name="sEsumar">Sumar</string>
+    <string name="sErestar">Restar</string>
+    <string name="sEresul">Resultado</string>
+
+    /* IDIOMA ALEMAN */
+    <string name="sAtitulo">Rechner</string>
+    <string name="sAop1">Erster Operand</string>
+    <string name="sAop2">Zweiter Operand</string>
+    <string name="sAsumar">Hinzufügen</string>
+    <string name="sArestar">Subtrahieren</string>
+    <string name="sAresul">Ergebnis</string>
+
+    /* IDIOMA KURDO */
+    <string name="sKtitulo">Calculator</string>
+    <string name="sKop1">Operasyona Yekemîn</string>
+    <string name="sKop2">Operasyona Duyemîn</string>
+    <string name="sKsumar">Add</string>
+    <string name="sKrestar">Veşêre</string>
+    <string name="sKresul">Encam</string>
+
+    /* IDIOMA JAPONES */
+    <string name="sJtitulo">電卓</string>
+    <string name="sJop1">最初のオペランド</string>
+    <string name="sJop2">二番目操作している</string>
+    <string name="sJsumar">追加</string>
+    <string name="sJrestar">減算</string>
+    <string name="sJresul">結果</string>
+
+</resources>

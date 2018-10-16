@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity2">
+
+    <TextView
+        android:id="@+id/tvPrincipal"
+        android:layout_width="293dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/stvPrincipal"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/lvDiasSemana"
+        android:layout_width="298dp"
+        android:layout_height="229dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrincipal" />
+
+    <RadioGroup
+        android:id="@+id/rgMeses"
+        android:layout_width="298dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvDiasSemana">
+
+        <RadioButton
+            android:id="@+id/rbEnero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:onClick="establecerDia"
+            android:text="@string/sEnero"
+            android:textColorLink="@color/colorAccent" />
+
+        <RadioButton
+            android:id="@+id/rbFebrero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="establecerDia"
+            android:layout_weight="1"
+            android:text="@string/sFebrero" />
+
+        <RadioButton
+            android:id="@+id/rbMarzo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="establecerDia"
+            android:layout_weight="1"
+            android:text="@string/sMarzo" />
+
+        <RadioButton
+            android:id="@+id/rbAbril"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="establecerDia"
+            android:text="@string/sAbril" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="115dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="volver"
+        android:text="@string/sbtnVolver"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgMeses" />
+</android.support.constraint.ConstraintLayout>

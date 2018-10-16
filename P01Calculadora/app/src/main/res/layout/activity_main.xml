@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/sEtitulo"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spOpciones" />
+
+    <EditText
+        android:id="@+id/etOperando1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/sEop1"
+        android:inputType="number"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
+
+    <EditText
+        android:id="@+id/etOperando2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/sEop2"
+        android:inputType="number"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etOperando1" />
+
+    <Button
+        android:id="@+id/bSumar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:onClick="sumar"
+        android:text="@string/sEsumar"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etOperando2" />
+
+    <Button
+        android:id="@+id/bRestar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:onClick="restar"
+        android:text="@string/sErestar"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/bSumar"
+        app:layout_constraintTop_toBottomOf="@+id/etOperando2" />
+
+    <TextView
+        android:id="@+id/tvResultado"
+        android:layout_width="283dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/sEresul"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bSumar" />
+
+    <RadioGroup
+        android:id="@+id/rgIdioma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="23dp"
+        android:checkedButton="@+id/rbEspanol"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rbEspanol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="traducir"
+            android:text="Español"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteY="490dp" />
+
+        <RadioButton
+            android:id="@+id/rbAleman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="traducir"
+            android:text="Deutsch"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteY="490dp" />
+
+        <RadioButton
+            android:id="@+id/rbKurdo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="traducir"
+            android:text="Kurdî"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteY="490dp" />
+
+        <RadioButton
+            android:id="@+id/rbJapones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="traducir"
+            android:text="日本"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteY="501dp" />
+
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spOpciones"
+        android:layout_width="270dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgIdioma" />
+
+</android.support.constraint.ConstraintLayout>

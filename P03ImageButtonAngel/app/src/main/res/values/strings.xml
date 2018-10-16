@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">P03ImageButtonAngelSalasCalvo</string>
+    <string name="sibMano">Botón Mano</string>
+    <string name="sibLibro">Botón Libro</string>
+</resources>

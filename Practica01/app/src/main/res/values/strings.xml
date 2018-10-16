@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Practica01 Angel Salas Calvo</string>
+    <string name="shintUsuario">usuario</string>
+    <string name="shintContrasena">contraseña</string>
+    <string name="sdescBotonAcceder">Boton Acceder</string>
+
+    <string name="sbtnVolver">Volver</string>
+    <string name="stvPrincipal">Seleccione un dia de la semana</string>
+    <string name="sEnero">Enero</string>
+    <string name="sFebrero">Febrero</string>
+    <string name="sMarzo">Marzo</string>
+    <string name="sAbril">Abril</string>
+
+</resources>
