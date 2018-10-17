@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">P07WebView Angel Salas</string>
+    <string name="sEtUrl">Introduzca una URL</string>
+    <string name="sBAcceder">Ir al sitio web</string>
+    <string name="sBCerrar">Cerrar</string>
+</resources>
