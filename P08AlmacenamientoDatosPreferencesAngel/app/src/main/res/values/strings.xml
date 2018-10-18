@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">P08AlmacenamientoDatosPreferences Angel</string>
     <string name="sEtEmail">Introduzca su email</string>
-    <string name="sBGuardar">Guardar 💾</string>
+    <string name="sBGuardar">Guardar</string>
 </resources>

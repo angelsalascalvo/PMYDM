@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">P09Agenda Angel Salas Calvo</string>
+    <string name="sEtNombre">Nombre</string>
+    <string name="sEtInformacion">Datos</string>
+    <string name="sBGuardar">Guardar</string>
+    <string name="sBBuscar">Buscar</string>
+</resources>
