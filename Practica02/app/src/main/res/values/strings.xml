@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Practica02 Angel Salas Calvo</string>
+    <string name="sTvTitulo">ACCESO</string>
+    <string name="sEtUsuario">Usuario</string>
+    <string name="sEtContrasena">Contraseña</string>
+    <string name="sBAcceder">Acceder</string>
+    <string name="sBRegistrarse">Registrarse</string>
+
+    <string name="sRbRubio">Rubio</string>
+    <string name="sRbMoreno">Moreno</string>
+    <string name="sRbPelirojo">Pelirojo</string>
+    <string name="sRbCastaño">Castaño</string>
+    <string name="sRbSinPelo">Sin Pelo</string>
+
+    <string name="sTvTituloPelo">Color de pelo</string>
+    <string name="sTvTituloCitas">Dia para citas</string>
+    <string name="sTvTituloTlf">Telefono</string>
+    <string name="sEtTituloMulti">Texto Multilinea</string>
+</resources>
