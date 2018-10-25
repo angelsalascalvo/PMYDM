@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">P11SQLite Angel Salas Calvo</string>
+    <string name="sCodigo">Codigo del producto</string>
+    <string name="sDescripcion">Descripción del producto</string>
+    <string name="sPrecio">Precio del producto</string>
+    <string name="sRegistrar">Registrar</string>
+    <string name="sBuscar">Buscar</string>
+    <string name="sModificar">Modificar</string>
+    <string name="sEliminar">Eliminar</string>
+</resources>
