@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SegundaActivity">
+
+    <TextView
+        android:id="@+id/tvNombre"
+        android:layout_width="249dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="23dp"
+        android:text="TextView"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="127dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/lvCitas"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloPelo">
+
+        <RadioButton
+            android:id="@+id/rbMoreno"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/sRbMoreno" />
+
+        <RadioButton
+            android:id="@+id/rbRubio"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:text="@string/sRbRubio" />
+
+        <RadioButton
+            android:id="@+id/rbPelirrojo"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:text="@string/sRbPelirojo" />
+
+        <RadioButton
+            android:id="@+id/rbCastano"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:text="@string/sRbCastaño" />
+
+        <RadioButton
+            android:id="@+id/rbSinPelo"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:text="@string/sRbSinPelo" />
+    </RadioGroup>
+
+    <ListView
+        android:id="@+id/lvCitas"
+        android:layout_width="163dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup2"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloCitas" />
+
+    <TextView
+        android:id="@+id/tvTituloCitas"
+        android:layout_width="163dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/sTvTituloCitas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvTituloPelo"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tvTituloPelo"
+        android:layout_width="127dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/sTvTituloPelo"
+        app:layout_constraintEnd_toStartOf="@+id/tvTituloCitas"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tvTituloTlf"
+        android:layout_width="91dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="18dp"
+        android:gravity="center_vertical"
+        android:text="@string/sTvTituloTlf"
+        android:textAlignment="gravity"
+        app:layout_constraintEnd_toStartOf="@+id/etTelefono"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="18dp"
+        app:layout_constraintEnd_toStartOf="@+id/tvNombre"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/usuario" />
+
+    <EditText
+        android:id="@+id/etTelefono"
+        android:layout_width="199dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:inputType="phone"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvTituloTlf"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+    <EditText
+        android:id="@+id/etMultilinea"
+        android:layout_width="290dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/sEtTituloMulti"
+        android:inputType="textMultiLine"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTelefono" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        android:background="@android:color/transparent"
+        android:onClick="volver"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/botonArchivo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etMultilinea"
+        app:srcCompat="@mipmap/volver" />
+
+    <ImageButton
+        android:id="@+id/botonArchivo"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:onClick="siguienteActivity"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/etMultilinea"
+        app:srcCompat="@mipmap/archivo" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="18dp"
+        android:background="@android:color/transparent"
+        android:onClick="guardarDatos"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/botonArchivo"
+        app:layout_constraintTop_toBottomOf="@+id/etMultilinea"
+        app:srcCompat="@mipmap/guardar" />
+
+</android.support.constraint.ConstraintLayout>
