@@ -144,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void eliminarClick(View view){
+    public void eliminarClick(View view) {
         //Crear la base de datos con los datos correspondientes
-        AdminSQLiteOpenHelper administracion = new AdminSQLiteOpenHelper(this, "administracion",null, 1);
+        AdminSQLiteOpenHelper administracion = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
         //Instancia referenciando base de datos ABIERTA par escritura
         SQLiteDatabase BaseDeDatos = administracion.getWritableDatabase();
 
@@ -159,15 +159,15 @@ public class MainActivity extends AppCompatActivity {
             //Cerramos la base de datos para no dejarla abierta
             BaseDeDatos.close();
             Toast.makeText(this, "Debe introducir el codigo producto a borrar", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             //modificar un registro de la tabla (descripcion y/o precio) donde el codigo sea igual al codigo introducido en el campo de texto
             // Y devuelve el numero de tuplas eliminadas
-            int numEliminadas = BaseDeDatos.delete("articulos","codigo="+codigoValor ,null);
+            int numEliminadas = BaseDeDatos.delete("articulos", "codigo=" + codigoValor, null);
 
             //Comprobar si se ha eliminado
-            if(numEliminadas==0) {
+            if (numEliminadas == 0) {
                 Toast.makeText(this, "No se ha podido borrar ningun producto con dicho codigo", Toast.LENGTH_SHORT).show();
-            }else if(numEliminadas == 1) {
+            } else if (numEliminadas == 1) {
                 Toast.makeText(this, "Producto eliminado!", Toast.LENGTH_SHORT).show();
 
                 //Limpiar los campos de texto
@@ -181,3 +181,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+/*
+    Campo color de tipo editText plain, incluir el nuevo campo de tipo color en la base de datos
+
+    Boton listar todos: Abre un nuevo activity con un control de texto multilinea que muestre el resultado de la consulta,
+    en este activity tambien boton de volver.
+
+    Aplicacion p11Repaso2 con una base de datos del tema que queramos con los mismos botones que la anterior
+    y añadir boton de buscar por otro campo diferente, mostrar información en el segundo activity a traves de multiline o list view
+ */
