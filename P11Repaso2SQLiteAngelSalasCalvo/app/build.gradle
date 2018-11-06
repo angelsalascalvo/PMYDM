@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.angel.p11repasosqliteangelsalascalvo"
+        applicationId "com.example.angel.p11repaso2sqliteangelsalascalvo"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1

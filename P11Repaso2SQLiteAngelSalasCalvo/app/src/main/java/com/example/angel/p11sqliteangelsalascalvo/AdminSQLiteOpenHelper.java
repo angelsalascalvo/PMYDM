@@ -29,11 +29,12 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         // real -> numero con decimal
 
         //Crear una tabla en la base de datos con sentencia sql
-        baseDatos.execSQL("create table articulos (" +
-                "codigo int primary key," +
-                "descripcion text, " +
-                "color text,"+
-                "precio real)");
+        baseDatos.execSQL("create table alumnos (" +
+                "identificador int primary key," +
+                "nombre text, " +
+                "residencia text,"+
+                "edad real,"+
+                "curso text)");
     }
 
     @Override

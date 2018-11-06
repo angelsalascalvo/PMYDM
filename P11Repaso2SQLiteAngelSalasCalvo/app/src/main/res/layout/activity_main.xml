@@ -7,85 +7,112 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/etCodigoProd"
+        android:id="@+id/etIdentificadorAlu"
         android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="@string/sCodigo"
+        android:hint="@string/sIdentificador"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/etDescripcionProd"
+        android:id="@+id/etNombreAlu"
         android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="@string/sDescripcion"
+        android:hint="@string/sNombre"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCodigoProd" />
+        app:layout_constraintTop_toBottomOf="@+id/etIdentificadorAlu" />
 
     <EditText
-        android:id="@+id/etPrecioProd"
+        android:id="@+id/etResidenciaAlu"
         android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="@string/sPrecio"
-        android:inputType="numberDecimal"
+        android:hint="@string/sResidencia"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etColorProd" />
+        app:layout_constraintTop_toBottomOf="@+id/etNombreAlu" />
+
+    <EditText
+        android:id="@+id/etCursoAlu"
+        android:layout_width="140dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="@string/sCurso"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etEdadAlu"
+        app:layout_constraintTop_toBottomOf="@+id/etResidenciaAlu" />
 
     <Button
         android:id="@+id/bRegistrar"
         android:layout_width="290dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/botones"
         android:onClick="registrarClick"
         android:text="@string/sRegistrar"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPrecioProd" />
+        app:layout_constraintTop_toBottomOf="@+id/etCursoAlu" />
 
     <Button
         android:id="@+id/bBuscar"
-        android:layout_width="290dp"
+        android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/botones"
         android:onClick="buscarClick"
         android:text="@string/sBuscar"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bBuscarCurso"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bRegistrar" />
+
+    <Button
+        android:id="@+id/bBuscarCurso"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/botones"
+        android:onClick="buscarCursoClick"
+        android:text="@string/sBuscarCurso"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bBuscar"
         app:layout_constraintTop_toBottomOf="@+id/bRegistrar" />
 
     <Button
         android:id="@+id/bListar"
         android:layout_width="290dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/botones"
         android:onClick="listarClick"
         android:text="@string/sListar"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bBuscar" />
+        app:layout_constraintTop_toBottomOf="@+id/bBuscarCurso" />
 
     <Button
         android:id="@+id/bModificar"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/botones"
         android:onClick="modificarClick"
@@ -100,7 +127,7 @@
         android:id="@+id/bEliminar"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/botones"
         android:onClick="eliminarClick"
         android:text="@string/sEliminar"
@@ -111,15 +138,29 @@
         app:layout_constraintTop_toBottomOf="@+id/bListar" />
 
     <EditText
-        android:id="@+id/etColorProd"
-        android:layout_width="290dp"
+        android:id="@+id/etEdadAlu"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
         android:ems="10"
-        android:hint="@string/sColor"
-        android:inputType="textPersonName"
+        android:hint="@string/sEdad"
+        android:inputType="numberSigned"
+        app:layout_constraintEnd_toStartOf="@+id/etCursoAlu"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etResidenciaAlu" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/sTitulo"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDescripcionProd" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

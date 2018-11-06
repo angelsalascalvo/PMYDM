@@ -1,9 +1,9 @@
 package com.example.angel.p11sqliteangelsalascalvo;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText etCodigom, etDescripcionm, etPreciom;
+    private EditText etCodigom, etDescripcionm, etPreciom, etColorm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +22,10 @@ public class MainActivity extends AppCompatActivity {
         etCodigom = (EditText) findViewById(R.id.etCodigoProd);
         etDescripcionm = (EditText) findViewById(R.id.etDescripcionProd);
         etPreciom = (EditText) findViewById(R.id.etPrecioProd);
+        etColorm = (EditText) findViewById(R.id.etColorProd);
     }
+
+    //----------------------------------------------------------------------------------------------
 
     //No olvidar crear la clase .java para poder administrar y poder crear nuestra base de datos SQLite
     public void registrarClick(View view){
@@ -34,10 +37,11 @@ public class MainActivity extends AppCompatActivity {
         //Almacenamos los datos introducidos por pantalla
         String codigoValor = etCodigom.getText().toString();
         String descripcionValor = etDescripcionm.getText().toString();
+        String colorValor = etColorm.getText().toString();
         String precioValor = etPreciom.getText().toString();
 
         //Comprobamos que los campos de texto no se encuentren vacios
-        if (codigoValor.isEmpty()||descripcionValor.isEmpty()||precioValor.isEmpty()) {
+        if (codigoValor.isEmpty()||descripcionValor.isEmpty()||precioValor.isEmpty()||colorValor.isEmpty()) {
             //Cerramos la base de datos para no dejarla abierta
             BaseDeDatos.close();
             Toast.makeText(this, "Debe completar todos los datos del producto", Toast.LENGTH_SHORT).show();
@@ -47,20 +51,25 @@ public class MainActivity extends AppCompatActivity {
             ContentValues fila = new ContentValues();
             fila.put("codigo", codigoValor);
             fila.put("descripcion", descripcionValor);
+            fila.put("color", colorValor);
             fila.put("precio", precioValor);
             //Insertar fila en una tabla
-            BaseDeDatos.insert("articulos", null, fila);
+            long res = BaseDeDatos.insert("articulos", null, fila);
 
             //Cerramos la base de datos para no dejarla abierta, realizando su commit correspondiente
             BaseDeDatos.close();
 
-            //Limpiar los campos de texto
-            etCodigom.setText("");
-            etDescripcionm.setText("");
-            etPreciom.setText("");
-
-            //Indicar al usuario que se ha añadido el producto
-            Toast.makeText(this, "Producto insertado!", Toast.LENGTH_SHORT).show();
+            //Indicar al usuario si se ha añadido el producto
+            if(res == -1)
+                Toast.makeText(this, "ERROR: Ya existe un producto con ese código", Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(this, "Producto insertado!", Toast.LENGTH_SHORT).show();
+                //Limpiar los campos de texto
+                etCodigom.setText("");
+                etDescripcionm.setText("");
+                etColorm.setText("");
+                etPreciom.setText("");
+            }
         }
     }
 
@@ -76,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Comprobar que el campo no esta vacio
         if(codigo.isEmpty()==false){
-            String sentencia = "select descripcion, precio from articulos where codigo = "+codigo+";";
+            String sentencia = "select descripcion, color, precio from articulos where codigo = "+codigo+";";
             //Creamos un cursor que es una referencia al conjunto de filas que devuelve un seclect;
             Cursor fila = BaseDeDatos.rawQuery(sentencia, null); //El null hace referencia a las columnas del cursor con las que queremos trabajar, en este caso todas
 
@@ -85,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
             if(fila.moveToFirst()){
                 //Obtener los datos del resultado del select (cursor)
                 etDescripcionm.setText(fila.getString(0));
-                etPreciom.setText(fila.getString(1));
+                etColorm.setText(fila.getString(1));
+                etPreciom.setText(fila.getString(2));
             }else
                 Toast.makeText(this, "Producto no encontrado", Toast.LENGTH_SHORT).show();
         }else
@@ -106,11 +116,12 @@ public class MainActivity extends AppCompatActivity {
         //Almacenamos los datos introducidos por pantalla
         String codigoValor = etCodigom.getText().toString();
         String descripcionValor = etDescripcionm.getText().toString();
+        String colorValor = etColorm.getText().toString();
         String precioValor = etPreciom.getText().toString();
 
         //Comprobamos que los campos de texto no se encuentren vacios
 
-        if (codigoValor.isEmpty()||descripcionValor.isEmpty()||precioValor.isEmpty()) {
+        if (codigoValor.isEmpty()||descripcionValor.isEmpty()||precioValor.isEmpty()||colorValor.isEmpty()) {
             //Cerramos la base de datos para no dejarla abierta
             BaseDeDatos.close();
             Toast.makeText(this, "Debe completar todos los datos del producto", Toast.LENGTH_SHORT).show();
@@ -120,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
             ContentValues fila = new ContentValues();
             fila.put("codigo", codigoValor);
             fila.put("descripcion", descripcionValor);
+            fila.put("color", colorValor);
             fila.put("precio", precioValor);
 
             //modificar un registro de la tabla (descripcion y/o precio) donde el codigo sea igual al codigo
@@ -136,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 //Limpiar los campos de texto
                 etCodigom.setText("");
                 etDescripcionm.setText("");
+                etColorm.setText("");
                 etPreciom.setText("");
             }
 
@@ -143,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
             BaseDeDatos.close();
         }
     }
+
+    //----------------------------------------------------------------------------------------------
 
     public void eliminarClick(View view) {
         //Crear la base de datos con los datos correspondientes
@@ -173,12 +188,24 @@ public class MainActivity extends AppCompatActivity {
                 //Limpiar los campos de texto
                 etCodigom.setText("");
                 etDescripcionm.setText("");
+                etColorm.setText("");
                 etPreciom.setText("");
             }
 
             //Cerramos la base de datos para no dejarla abierta, realizando su commit correspondiente
             BaseDeDatos.close();
         }
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * METODO PARA PASAR A LA SIGUIENTE ACTIVITY DONDE MOSTRAR EL CONTENIDO DE LA TABLA
+     * @param view
+     */
+    public void listarClick(View view){
+        Intent i = new Intent(this, SegundaActivity.class);
+        startActivity(i);
     }
 }
 

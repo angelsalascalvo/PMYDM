@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">P11Repaso2 Angel Salas </string>
+    <string name="sIdentificador">Identificador del alumno</string>
+    <string name="sTitulo">BASE DE DATOS ALUMNOS</string>
+    <string name="sNombre">Nombre completo</string>
+    <string name="sCurso">Curso</string>
+    <string name="sEdad">Edad</string>
+    <string name="sResidencia">Lugar de residencia</string>
+    <string name="sBuscar">Buscar</string>
+    <string name="sBuscarCurso">Buscar por curso</string>
+    <string name="sRegistrar">Registrar</string>
+    <string name="sModificar">Modificar</string>
+    <string name="sEliminar">Eliminar</string>
+    <string name="sColor">Color del producto</string>
+    <string name="sListar">Mostrar todo</string>
+    <string name="sVolver">Volver</string>
+
+</resources>
