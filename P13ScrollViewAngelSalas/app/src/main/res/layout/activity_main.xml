@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:id="@+id/svFrutas"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ibCereza"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_green_dark"
+                android:contentDescription="@string/botonfrutas"
+                android:onClick="seleccionDeFruta"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/cereza" />
+
+            <ImageButton
+                android:id="@+id/ibFresa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/botonfrutas"
+                android:onClick="seleccionDeFruta"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/fresa" />
+
+            <ImageButton
+                android:id="@+id/ibKiwi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_green_dark"
+                android:contentDescription="@string/botonfrutas"
+                android:onClick="seleccionDeFruta"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/kiwi" />
+
+            <ImageButton
+                android:id="@+id/ibPera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/botonfrutas"
+                android:onClick="seleccionDeFruta"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/pera" />
+
+            <ImageButton
+                android:id="@+id/ibPina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_green_dark"
+                android:contentDescription="@string/botonfrutas"
+                android:onClick="seleccionDeFruta"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/pina" />
+
+            <ImageButton
+                android:id="@+id/ibPlatano"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/botonfrutas"
+                android:onClick="seleccionDeFruta"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/platano" />
+
+            <ImageButton
+                android:id="@+id/ibRemolacha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_green_dark"
+                android:contentDescription="@string/botonfrutas"
+                android:onClick="seleccionDeFruta"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/remolacha" />
+
+            <ImageButton
+                android:id="@+id/ibSandia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/botonfrutas"
+                android:onClick="seleccionDeFruta"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/sandia" />
+
+            <ImageButton
+                android:id="@+id/ibTomate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_green_dark"
+                android:contentDescription="@string/botonfrutas"
+                android:onClick="seleccionDeFruta"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/tomate" />
+
+            <ImageButton
+                android:id="@+id/ibUva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/botonfrutas"
+                android:onClick="seleccionDeFruta"
+                android:padding="5dp"
+                app:srcCompat="@mipmap/uvas" />
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
