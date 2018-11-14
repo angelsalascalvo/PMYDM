@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/ibPortada"
+        android:layout_width="362dp"
+        android:layout_height="327dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/portada1" />
+
+    <ImageButton
+        android:id="@+id/ibPlay_Pause"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@mipmap/reproducir"
+        android:onClick="botonPlayPauseClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ibDetener"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ibPortada" />
+
+    <ImageButton
+        android:id="@+id/ibDetener"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@mipmap/detener"
+        android:onClick="botonDetenerClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ibLoop"
+        app:layout_constraintStart_toEndOf="@+id/ibPlay_Pause"
+        app:layout_constraintTop_toBottomOf="@+id/ibPortada" />
+
+    <ImageButton
+        android:id="@+id/ibLoop"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@mipmap/no_repetir"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ibAnterior"
+        app:layout_constraintStart_toEndOf="@+id/ibDetener"
+        app:layout_constraintTop_toBottomOf="@+id/ibPortada" />
+
+    <ImageButton
+        android:id="@+id/ibAnterior"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@mipmap/anterior"
+        android:onClick="botonAnteriorClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ibSiguiente"
+        app:layout_constraintStart_toEndOf="@+id/ibLoop"
+        app:layout_constraintTop_toBottomOf="@+id/ibPortada" />
+
+    <ImageButton
+        android:id="@+id/ibSiguiente"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@mipmap/siguiente"
+        android:onClick="botonSiguienteClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ibAnterior"
+        app:layout_constraintTop_toBottomOf="@+id/ibPortada" />
+</android.support.constraint.ConstraintLayout>
