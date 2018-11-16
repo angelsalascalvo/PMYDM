@@ -50,6 +50,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:background="@mipmap/no_repetir"
+        android:onClick="loopClick"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toStartOf="@+id/ibAnterior"
         app:layout_constraintStart_toEndOf="@+id/ibDetener"

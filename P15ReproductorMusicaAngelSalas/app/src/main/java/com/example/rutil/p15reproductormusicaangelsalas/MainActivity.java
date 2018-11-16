@@ -145,8 +145,29 @@ public class MainActivity extends AppCompatActivity {
      * METODO QUE SE EJECUTARÁ AL HACER CLICK SOBRE EL BOTON REPETIR
      * @param view
      */
-   /* if(repetir==1){
+    public void loopClick(View view) {
+        //Si esta repitiendo lo cambiamos a no repetir
+        if (repetir == 1) {
+            //Establecemos el icono de no repetir
+            ibLoopm.setImageResource(R.mipmap.no_repetir);
+            //Establecer el looping a falso
+            arrayCanciones[posicion].setLooping(false);
+            //Indicar al usuario
+            Toast.makeText(this, "Modo bucle desactivado", Toast.LENGTH_LONG).show(); //Lo indicaremos
+            //Establecer valor de la variable
+            repetir = 2;
 
-    }*/
+            //Si no esta repitiendo
+        } else {
+            //Establecemos el icono de repetir
+            ibLoopm.setImageResource(R.mipmap.repetir);
+            //Establecer el looping a falso
+            arrayCanciones[posicion].setLooping(false);
+            //Indicar al usuario
+            Toast.makeText(this, "Modo bucle activado", Toast.LENGTH_LONG).show(); //Lo indicaremos
+            //Establecer valor de la variable
+            repetir=1;
+        }
+    }
 
 }
