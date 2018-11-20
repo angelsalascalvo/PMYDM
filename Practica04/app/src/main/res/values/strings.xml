@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Repaso4 Angel Salas Calvo</string>
+    <string name="pista1">Shelter</string>
+    <string name="pista2">Lonely Together</string>
+    <string name="pista3">Somewhere In Stockholm</string>
+    <string name="pista4">Stole the show</string>
+    <string name="pistaGrabada">miGrabacion.mp3</string>
+
+</resources>

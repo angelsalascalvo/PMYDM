@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background"
+    tools:context="com.example.rutil.repaso4AngelSalasCalvo.MainActivity">
+
+    <ImageButton
+        android:id="@+id/ibPlay_Pause"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="16dp"
+        android:background="@mipmap/reproducir"
+        android:onClick="botonPlayPauseClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ibDetener"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <ImageButton
+        android:id="@+id/ibDetener"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:background="@mipmap/detener"
+        android:onClick="botonDetenerClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ibLoop"
+        app:layout_constraintStart_toEndOf="@+id/ibPlay_Pause"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <ImageButton
+        android:id="@+id/ibLoop"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:background="@mipmap/no_repetir"
+        android:onClick="loopClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ibAnterior"
+        app:layout_constraintStart_toEndOf="@+id/ibDetener"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <ImageButton
+        android:id="@+id/ibAnterior"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:background="@mipmap/anterior"
+        android:onClick="botonAnteriorClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ibSiguiente"
+        app:layout_constraintStart_toEndOf="@+id/ibLoop"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <ImageButton
+        android:id="@+id/ibSiguiente"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="18dp"
+        android:background="@mipmap/siguiente"
+        android:onClick="botonSiguienteClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ibAnterior"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <ImageButton
+        android:id="@+id/ibGrabar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="18dp"
+        android:background="@mipmap/micro"
+        android:onClick="botonGrabarClic"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ibLoop" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="332dp"
+        android:layout_height="332dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clCancion1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp">
+
+                <ImageButton
+                    android:id="@+id/ibCancion1"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="#294869"
+                    android:onClick="botonListadoClick"
+                    android:scaleType="fitStart"
+                    app:srcCompat="@mipmap/maxresdefault" />
+
+                <TextView
+                    android:id="@+id/tvCancion1"
+                    android:layout_width="237dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/pista1"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ibCancion1"
+                    app:layout_constraintEnd_toEndOf="@+id/ibCancion1"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/ibCancion1"
+                    app:layout_constraintTop_toTopOf="@+id/ibCancion1" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clCancion2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp">
+
+                <ImageButton
+                    android:id="@+id/ibCancion2"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="#294869"
+                    android:onClick="botonListadoClick"
+                    android:scaleType="fitStart"
+                    app:srcCompat="@mipmap/large" />
+
+                <TextView
+                    android:id="@+id/tvCancion2"
+                    android:layout_width="237dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/pista2"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ibCancion2"
+                    app:layout_constraintEnd_toEndOf="@+id/ibCancion2"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/ibCancion2"
+                    app:layout_constraintTop_toTopOf="@+id/ibCancion2" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clCancion3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp">
+
+                <ImageButton
+                    android:id="@+id/ibCancion3"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="#294869"
+                    android:onClick="botonListadoClick"
+                    android:scaleType="fitStart"
+                    app:srcCompat="@mipmap/stories" />
+
+                <TextView
+                    android:id="@+id/tvCancion3"
+                    android:layout_width="237dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/pista3"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ibCancion3"
+                    app:layout_constraintEnd_toEndOf="@+id/ibCancion3"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/ibCancion3"
+                    app:layout_constraintTop_toTopOf="@+id/ibCancion3" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clCancion4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp">
+
+                <ImageButton
+                    android:id="@+id/ibCancion4"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="#294869"
+                    android:onClick="botonListadoClick"
+                    android:scaleType="fitStart"
+                    app:srcCompat="@mipmap/kygo" />
+
+                <TextView
+                    android:id="@+id/tvCancion4"
+                    android:layout_width="237dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/pista4"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ibCancion4"
+                    app:layout_constraintEnd_toEndOf="@+id/ibCancion4"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/ibCancion4"
+                    app:layout_constraintTop_toTopOf="@+id/ibCancion4" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clCancionGrabada"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp">
+
+                <ImageButton
+                    android:id="@+id/ibCancionGrabada"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="#294869"
+                    android:onClick="botonListadoClick"
+                    android:scaleType="fitStart"
+                    app:srcCompat="@mipmap/grabacion" />
+
+                <TextView
+                    android:id="@+id/tvCancionGrabada"
+                    android:layout_width="237dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/pistaGrabada"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ibCancionGrabada"
+                    app:layout_constraintEnd_toEndOf="@+id/ibCancionGrabada"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/ibCancionGrabada"
+                    app:layout_constraintTop_toTopOf="@+id/ibCancionGrabada" />
+
+                <ImageButton
+                    android:id="@+id/ibBorrar"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@mipmap/trash"
+                    android:onClick="borrarGrabacionClick"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="@+id/ibCancionGrabada"
+                    app:layout_constraintTop_toTopOf="@+id/ibCancionGrabada" />
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
