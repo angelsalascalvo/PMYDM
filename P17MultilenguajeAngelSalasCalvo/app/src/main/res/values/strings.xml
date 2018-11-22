@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">P17 Multilenguaje Angel</string>
+    <string name="sBAcceder">Iniciar Sesión</string>
+    <string name="sEtUsuario">Usuario</string>
+    <string name="sEtContrasena">Contraseña</string>
+    <string name="sTvDerechos">Todos los derechos reservados.</string>
+</resources>

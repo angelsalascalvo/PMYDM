@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Critique AngelSalasCalvo</string>
+    <string name="sTvDerechos">Tous droits réservés</string>
+    <string name="sBAcceder">Commencer la session</string>
+    <string name="sEtUsuario">Utilisateur</string>
+    <string name="sEtContrasena">Mot de passe</string>
+    <string name="sBAnterior">précédent</string>
+</resources>

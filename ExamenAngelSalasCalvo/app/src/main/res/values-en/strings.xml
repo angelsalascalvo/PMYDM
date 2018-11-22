@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Review AngelSalasCalvo</string>
+    <string name="sTvDerechos">All rights reserved</string>
+    <string name="sBAcceder">Login</string>
+    <string name="sEtUsuario">User</string>
+    <string name="sEtContrasena">Password</string>
+    <string name="sBAnterior">Previous</string>
+</resources>
