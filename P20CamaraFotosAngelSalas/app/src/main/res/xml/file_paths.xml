@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Indicar la ruta y el nombre que tendrá la imagen en forma de copia en nuestro
+    directorio de la aplicación para que se pueda visualizar en el imageView -->
+    <external-path
+        name="miImagen"
+        path="Android/data/com.example.rutil.p20camarafotosangelsalas/imagenes"/>
+</paths>

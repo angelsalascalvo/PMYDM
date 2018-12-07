@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/miCompartir"
+        android:icon="@drawable/compartir"
+        android:title="Item"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/miBuscar"
+        android:icon="@drawable/buscar"
+        android:title="Item"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/miOpcion1"
+        android:title="Opción1" />
+    <item
+        android:id="@+id/miOpcion2"
+        android:title="Salir" />
+</menu>
