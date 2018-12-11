@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">PMDMVideoAngelSalasCalvo</string>
+    <string name="app_name">PMYDMVideo AngelSalasCalvo</string>
+    <string name="bGrabar">GRABAR</string>
+    <string name="bReproducir">REPRODUCIR</string>
 </resources>
