@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PMDMSensorGiroscopio</string>
+    <string name="sActivarGiroscopio">GIROSCOPIO</string>
+    <string name="tvGrados">0º</string>
+</resources>
