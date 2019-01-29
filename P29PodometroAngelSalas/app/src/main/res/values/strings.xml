@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">P29PodometroAngelSalas</string>
+    <string name="tvTitulo">Introduce un objetivo de pasos</string>
+    <string name="etPasosADar">Pasos</string>
+
+    <string name="tvPasos">0</string>
+    <string name="bEmpezar">Empezar</string>
+    <string name="bRendirse">Rendirse</string>
+
+    <string name="tvTxtPasos">Pasos actuales</string>
+    <string name="tvTxtObjetivo">Objetivo</string>
+    <string name="tvCamino">.............................................................................</string>
+</resources>
