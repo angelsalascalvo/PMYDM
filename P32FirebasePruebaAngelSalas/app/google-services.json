@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1056547568227",
+    "firebase_url": "https://proyectoangelsalas.firebaseio.com",
+    "project_id": "proyectoangelsalas",
+    "storage_bucket": "proyectoangelsalas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056547568227:android:337f151d2c37b308",
+        "android_client_info": {
+          "package_name": "com.example.rutil.p32firebasepruebaangelsalas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056547568227-1p5iev8pudht377ic3v5kdeklmrmiqsr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rutil.p32firebasepruebaangelsalas",
+            "certificate_hash": "f3587474dd5dd6cf4dc7501f96e3d7a942d8be60"
+          }
+        },
+        {
+          "client_id": "1056547568227-nltropg7lsmh2a3h33hm6djjnnjb53jd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2PrJrfsyjs7ITCxWXanbedm04hORTw14"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056547568227-nltropg7lsmh2a3h33hm6djjnnjb53jd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
