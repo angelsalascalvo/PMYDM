@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "661747266724-f0du320ig5rl5punjt57720docrhiuo1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rutil.sendbox",
+            "certificate_hash": "f3587474dd5dd6cf4dc7501f96e3d7a942d8be60"
+          }
+        },
+        {
           "client_id": "661747266724-8u9p59lmd4skq772q7c340r5r3uh8ous.apps.googleusercontent.com",
           "client_type": 3
         }
