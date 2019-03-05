@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "661747266724",
+    "firebase_url": "https://sendbox-app.firebaseio.com",
+    "project_id": "sendbox-app",
+    "storage_bucket": "sendbox-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661747266724:android:7c2e4d944dfe29e1",
+        "android_client_info": {
+          "package_name": "com.example.rutil.sendbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661747266724-sltjescko4odqivkpkpm86rihsl13a67.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rutil.sendbox",
+            "certificate_hash": "9c9a045d280b3dd7380608043e2d4a14f87cbaa1"
+          }
+        },
+        {
+          "client_id": "661747266724-8u9p59lmd4skq772q7c340r5r3uh8ous.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk6iZDYIUS-hC0IXVHmVD3R2EsrvWCuXY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661747266724-8u9p59lmd4skq772q7c340r5r3uh8ous.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
