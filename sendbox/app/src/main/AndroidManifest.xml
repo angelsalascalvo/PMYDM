@@ -24,6 +24,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityTranspor" />
-        <activity android:name=".ActivityRegistro" android:label="@string/titRegistro"></activity>
+        <activity
+            android:name=".ActivityRegistro"
+            android:label="@string/titRegistro" />
+        <activity android:name=".ActivityCrearPaquete"></activity>
     </application>
+
 </manifest>

@@ -1,5 +1,7 @@
 package com.example.rutil.sendbox;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -64,7 +66,8 @@ public class ActivityRegistro extends AppCompatActivity{
     protected void onStart() {
         super.onStart();
         //Añade el escuchador para obtener cuenta de firebase
-        firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        if (firebaseAuthListener!=null)
+            firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     //----------------------------------------------------------------------------------------------
@@ -188,7 +191,7 @@ public class ActivityRegistro extends AppCompatActivity{
                     //Guardar los datos del administrador en el nodo
                     DatabaseReference administradores = baseDatos.getReference("administradores");
                     administradores.child(uid).setValue(etNombre.getText().toString());
-                    //Regirigir
+                    //Cargar Activity
                 }else
                     tvError.setText(getString(R.string.errValidacion));
             }
@@ -211,6 +214,10 @@ public class ActivityRegistro extends AppCompatActivity{
                 refTransp.child("nombre").setValue(etNombre.getText().toString());
                 refTransp.child("ubicacion/lat").setValue("null");
                 refTransp.child("ubicacion/long").setValue("null");
+
+                //Cargar Activity
+                Intent i = new Intent(this, ActivityTranspor.class);
+                startActivity(i);
             }
         }
     }

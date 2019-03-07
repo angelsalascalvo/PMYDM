@@ -34,4 +34,16 @@
     <string name="errDNI">El campo DNI no puede estar vacío</string>
     <string name="errMatricula">El campo Matricula no puede estar vacío</string>
     <string name="errValidacion">Código de validacion erroneo</string>
+    <string name="errCampos">Debes rellenar todos los campos.</string>
+    <string name="errDuplicado">Ya existe un paquete con ese código.</string>
+    <string name="estEntregado">Entregado</string>
+    <string name="estPendiente">Pendiente</string>
+
+    <string name="pqCodigo">Codigo Paquete</string>
+    <string name="pqNombre">Nombre Destinatario</string>
+    <string name="pqDireccion">Direccion Entrega</string>
+    <string name="bAnadir">Añadir</string>
+    <string name="bDescartar">Descartar</string>
+    <string name="guardado">Registro guardado</string>
+
 </resources>

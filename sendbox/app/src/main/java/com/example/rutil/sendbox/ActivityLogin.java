@@ -1,6 +1,7 @@
 package com.example.rutil.sendbox;
 
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,13 +42,11 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
 
     // Base de datos ============================================
     private FirebaseDatabase baseDatos;
-    //Variable para almacenar los id de los usuarios administradores
-    private ArrayList<String> uidAdmins= new ArrayList<String>();
-    //Variable para almacenar los id de los usuarios transportistas
-    private ArrayList<String> uidTransp= new ArrayList<String>();
+    private ArrayList<String> uidAdmins = new ArrayList<String>(); //UID usuarios administradores
+    private ArrayList<String> uidTransp = new ArrayList<String>(); //UID usuarios transportistas
 
     // Otros ====================================================
-
+    private boolean adminObtenidos, transpObtenidos, iniciado;
     //----------------------------------------------------------------------------------------------
 
     /**
@@ -58,16 +57,17 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        adminObtenidos=false;
+        transpObtenidos=false;
+        iniciado=false;
 
         //Referencia a la base de datos
         baseDatos = FirebaseDatabase.getInstance();
-        // Llamada al metodo para obtener usuarios administradores
+        //Referencia al objeto de autenticacion de firebase (usuario)
+        firebaseAuth = FirebaseAuth.getInstance();
+        // Llamada a los metodos para obtener los diferentes usuarios
         obtenerAdministradores();
-        // Llamada al metodo para obtener usuarios transportistas
         obtenerTransportistas();
-
-        //Inicializar el inicio de sesion con google
-        inicioSesion();
     }
 
     //----------------------------------------------------------------------------------------------
@@ -79,7 +79,9 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
     protected void onStart() {
         super.onStart();
         //Añade el escuchador para obtener cuenta de firebase
-        firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        if(firebaseAuthListener!=null)
+            firebaseAuth.addAuthStateListener(firebaseAuthListener);
+
     }
 
     //----------------------------------------------------------------------------------------------
@@ -93,6 +95,25 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
         //Quitamos el escuchador si estaba instanciado
         if (firebaseAuthListener != null) {
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * METODO PARA INICIAR LA FUNCIONALIDAD DEL ACTIVITY
+     */
+    public void iniciar(){
+        //Se comprueba si ya esta logueado de anteriores sesiones
+        if(firebaseAuth!=null){
+            //Si se esta logueado obtenemos el usuario
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            //Abrimos la activity correspondiente al usuario
+            siguienteActivity(user);
+        }
+        //Si no esta logueado, se abre el inicio de sesion con google (seleccion de cuenta)
+        else{
+            inicioSesion();
         }
     }
 
@@ -126,8 +147,7 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        //Obtener el objeto de usuario de Firebase
-        firebaseAuth = FirebaseAuth.getInstance();
+        //Objeto de escucha para obtener el usuario del listado de utenticacion de firebase
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -208,10 +228,13 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
             if(user.getUid().equals(uidAdmins.get(i)))
                 admin=true;
         }
+        Log.d("Datito", "Tamano "+uidTransp.size());
         //Si no es administrador comprobar si esta registrado como transportista
         if(!admin){
-            for(int i=0; i<uidAdmins.size();i++){
-                if(user.getUid().equals(uidAdmins.get(i)))
+            Log.d("Datito", "Tamano "+uidTransp.size());
+            for(int i=0; i<uidTransp.size();i++){
+                Log.d("Datito", ""+uidTransp.get(i));
+                if(user.getUid().equals(uidTransp.get(i)))
                     transp=true;
             }
         }
@@ -222,6 +245,8 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
 
         }else if(transp){
             Log.d("Datito", "Transssssssssssss");
+            Intent i = new Intent(this, ActivityTranspor.class);
+            startActivity(i);
 
         //En caso contrario se mostrará el activity de registro
         }else{
@@ -238,7 +263,7 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
      * Se almacenan en el array correspondiente
      */
     public void obtenerAdministradores(){
-        DatabaseReference administradores = baseDatos.getReference("administradores");
+        final DatabaseReference administradores = baseDatos.getReference("administradores");
 
         // Poner a la escucha el nodo de administradores
         administradores.addValueEventListener(new ValueEventListener() {
@@ -248,6 +273,14 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
                 uidAdmins=new ArrayList<String>();
                 for(DataSnapshot hijo : dataSnapshot.getChildren()) {
                     uidAdmins.add(hijo.getKey());
+                }
+                adminObtenidos=true;
+
+                //Al obtener los datos si se han obtenido los de transportistas
+                // y no se ha iniciado se inicia la funcionalidad
+                if(transpObtenidos && iniciado==false){
+                    iniciar();
+                    iniciado = true;
                 }
             }
 
@@ -275,6 +308,15 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
                 uidTransp=new ArrayList<String>();
                 for(DataSnapshot hijo : dataSnapshot.getChildren()) {
                     uidTransp.add(hijo.getKey());
+                    Log.d("Datito", "el bueno"+hijo.getKey());
+                }
+                transpObtenidos=true;
+
+                //Al obtener los datos si se han obtenido los de administradores
+                // y no se ha iniciado se inicia la funcionalidad
+                if(adminObtenidos && iniciado==false){
+                    iniciar();
+                    iniciado = true;
                 }
             }
 
