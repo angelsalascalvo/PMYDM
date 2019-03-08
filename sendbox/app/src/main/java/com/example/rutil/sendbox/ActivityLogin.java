@@ -38,6 +38,7 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private SignInButton signInButton;
+    private FirebaseUser user;
     public static final int SIGN_IN_CODE = 777;
 
     // Base de datos ============================================
@@ -63,11 +64,15 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
 
         //Referencia a la base de datos
         baseDatos = FirebaseDatabase.getInstance();
-        //Referencia al objeto de autenticacion de firebase (usuario)
+        //Referencia al objeto de autenticacion de firebase
         firebaseAuth = FirebaseAuth.getInstance();
+        //Se intenta obtener el usuario si esta logueado anteriormente
+        FirebaseUser user = firebaseAuth.getCurrentUser();
         // Llamada a los metodos para obtener los diferentes usuarios
         obtenerAdministradores();
         obtenerTransportistas();
+
+
     }
 
     //----------------------------------------------------------------------------------------------
@@ -79,7 +84,7 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
     protected void onStart() {
         super.onStart();
         //Añade el escuchador para obtener cuenta de firebase
-        if(firebaseAuthListener!=null)
+       if(firebaseAuthListener!=null)
             firebaseAuth.addAuthStateListener(firebaseAuthListener);
 
     }
@@ -105,9 +110,7 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
      */
     public void iniciar(){
         //Se comprueba si ya esta logueado de anteriores sesiones
-        if(firebaseAuth!=null){
-            //Si se esta logueado obtenemos el usuario
-            FirebaseUser user = firebaseAuth.getCurrentUser();
+        if(user!=null){
             //Abrimos la activity correspondiente al usuario
             siguienteActivity(user);
         }
@@ -157,6 +160,8 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
                 }
             }
         };
+
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     //----------------------------------------------------------------------------------------------
@@ -233,7 +238,7 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
         if(!admin){
             Log.d("Datito", "Tamano "+uidTransp.size());
             for(int i=0; i<uidTransp.size();i++){
-                Log.d("Datito", ""+uidTransp.get(i));
+                Log.d("Datito", "-> "+user.getUid());
                 if(user.getUid().equals(uidTransp.get(i)))
                     transp=true;
             }

@@ -97,41 +97,48 @@ public class ActivityCrearPaquete extends AppCompatActivity {
                 etCodigo.getText().length()==0)
             tvError.setText(getString(R.string.errCampos));
         else {
-            //Comprobar que no existe un producto con ese codigo
             valido = true;
-            baseDatos.getReference("paquetes").addValueEventListener(new ValueEventListener() {
+            final DatabaseReference listPaquetes = baseDatos.getReference("paquetes");
+            //Comprobar que no existe un producto con ese codigo
+            listPaquetes.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot fila : dataSnapshot.getChildren()) {
-                        Log.d("holi", ""+fila.getKey());
                         if (fila.getKey().equalsIgnoreCase(etCodigo.getText().toString())) {
                             valido = false;
-                            Log.d("holi", "---"+valido);
                         }
                     }
+                    //Una vez comprobado llamar al metodo para guardar datos si es posible
+                    guardarDatos();
+                    //Eliminar el listener
+                    listPaquetes.removeEventListener(this);
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
             });
+        }
+    }
 
+    /**
+     * METODO PARA ALMACENAR LOS DATOS SI ES UN CODIGO VALIDO
+     */
+    public void guardarDatos(){
+        //Si es valido el codigo actuamos
+        if (valido) {
+            Log.d("Valido", "v"+ valido);
+            //Guardar datos
+            DatabaseReference pq = baseDatos.getReference("paquetes").child(etCodigo.getText().toString());
+            pq.child("destinatario").setValue(etNombreDest.getText().toString());
+            pq.child("direccion").setValue(etNombreDest.getText().toString());
+            pq.child("entregado").setValue("no");
+            pq.child("transportista").setValue(user.getUid());
 
-            //Si es valido el codigo actuamos
-            if (valido) {
-                Log.d("holi", ""+valido);
-                //Guardar datos
-                DatabaseReference pq = baseDatos.getReference("paquetes").child(etCodigo.getText().toString());
-                pq.child("destinatario").setValue(etNombreDest.getText().toString());
-                pq.child("direccion").setValue(etNombreDest.getText().toString());
-                pq.child("entregado").setValue("no");
-                pq.child("transportista").setValue(user.getUid());
-
-                Toast.makeText(this, getString(R.string.guardado), Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                tvError.setText(getString(R.string.errDuplicado));
-            }
+            Toast.makeText(this, getString(R.string.guardado), Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            tvError.setText(getString(R.string.errDuplicado));
         }
     }
 

@@ -5,8 +5,10 @@ public class PaqueteDatos {
     private String codigo;
     private String nombre;
     private String direccion;
-    private String estado;
+    private String entregado;
     private boolean mostrarOp;
+    private int colorEstado;
+    private int imagenButtonEstado;
 
     /**
      * CONSTRUCTOR POR DEFECTO
@@ -27,7 +29,7 @@ public class PaqueteDatos {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
-        this.estado = estado;
+        this.entregado = estado;
         this.mostrarOp = false;
     }
 
@@ -67,12 +69,12 @@ public class PaqueteDatos {
         this.direccion = direccion;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getEntregado() {
+        return entregado;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEntregado(String entregado) {
+        this.entregado = entregado;
     }
 
     public boolean isMostrarOp() {
@@ -81,5 +83,21 @@ public class PaqueteDatos {
 
     public void setMostrarOp(boolean mostrarOp) {
         this.mostrarOp = mostrarOp;
+    }
+
+    public int getColorEstado() {
+        return colorEstado;
+    }
+
+    public void setColorEstado(int colorEstado) {
+        this.colorEstado = colorEstado;
+    }
+
+    public int getImagenButtonEstado() {
+        return imagenButtonEstado;
+    }
+
+    public void setImagenButtonEstado(int imagenButtonEstado) {
+        this.imagenButtonEstado = imagenButtonEstado;
     }
 }

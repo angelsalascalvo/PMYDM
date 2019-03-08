@@ -65,14 +65,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Avd Almanzora no 9" />
+                    tools:text="Avd Almanzora no 9" />
 
                 <TextView
                     android:id="@+id/tvEstado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Pendiente de entrega" />
+                    tools:text="Pendiente de entrega" />
             </LinearLayout>
 
         </LinearLayout>
@@ -91,11 +91,11 @@
             app:layout_constraintTop_toBottomOf="@+id/lyPaquete">
 
             <ImageButton
-                android:id="@+id/ibEntregar"
+                android:id="@+id/ibEstado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@android:color/holo_green_dark"
+                android:background="@color/verde"
                 android:padding="6dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/entregado" />
@@ -105,8 +105,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/gris"
-                android:padding="8dp"
+                android:background="@android:color/black"
+                android:padding="11dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/lapiz" />
 
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/holo_red_dark"
-                android:padding="8dp"
+                android:padding="11dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/eliminar" />
 

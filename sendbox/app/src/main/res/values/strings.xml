@@ -35,7 +35,7 @@
     <string name="errMatricula">El campo Matricula no puede estar vacío</string>
     <string name="errValidacion">Código de validacion erroneo</string>
     <string name="errCampos">Debes rellenar todos los campos.</string>
-    <string name="errDuplicado">Ya existe un paquete con ese código.</string>
+    <string name="errDuplicado">Codigo ya existente en la base de datos.</string>
     <string name="estEntregado">Entregado</string>
     <string name="estPendiente">Pendiente</string>
 

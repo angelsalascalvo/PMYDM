@@ -1,11 +1,14 @@
 package com.example.rutil.sendbox;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +17,7 @@ import java.util.ArrayList;
 
 public class FilaPaquete extends RecyclerView.Adapter<FilaPaquete.EjemploFilaPaquete> {
     ArrayList<PaqueteDatos> listadoPaquetes;
+
 
     /**
      * CONSTRUCTOR PARAMETRIZADO
@@ -45,21 +49,23 @@ public class FilaPaquete extends RecyclerView.Adapter<FilaPaquete.EjemploFilaPaq
     //----------------------------------------------------------------------------------------------
 
     /**
-     * METODO QUE SE EJECUTA AL HACER SCROLL EN EL RECYCLER VIEW PARA CREAR LAS NUEVAS FILAS QUE SE VAN A MOSTRAR
+     * METODO QUE SE EJECUTA PARA CREAR LAS FILAS QUE SE VAN A MOSTRAR
      * Ya que recyclerView Elimina las filas al hacer scroll y las crea de nuevo para ahorrar memoria y así no tener
      * que crear todos los registros o filas de una vez
      * @param i
      */
     @Override
-    public void onBindViewHolder(@NonNull EjemploFilaPaquete fila, final int i) {
+    public void onBindViewHolder(@NonNull final EjemploFilaPaquete fila, final int i) {
         //Obtener los datos del array y agregarlos a los elementos de la fila que se mostrará
         fila.tvCodigo.setText(listadoPaquetes.get(i).getCodigo());
         fila.tvDireccion.setText(listadoPaquetes.get(i).getDireccion());
         fila.tvNombre.setText(listadoPaquetes.get(i).getNombre());
-        fila.tvEstado.setText(listadoPaquetes.get(i).getEstado());
+        fila.tvEstado.setText(listadoPaquetes.get(i).getEntregado());
         fila.ivEstado.setImageResource(listadoPaquetes.get(i).getImgEstado());
+        fila.ibEstado.setImageResource(listadoPaquetes.get(i).getImagenButtonEstado());
+        fila.ibEstado.setBackgroundColor(listadoPaquetes.get(i).getColorEstado());
 
-        //Poner a la escucha el elemento
+        //Accion al presionar la fila
         fila.lyPaquete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +90,28 @@ public class FilaPaquete extends RecyclerView.Adapter<FilaPaquete.EjemploFilaPaq
         else
             fila.lyAcciones.setVisibility(View.GONE);
 
+        //Accion al presionar el boton estado
+        fila.ibEstado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Si el paquete no esta entregado se marca como entregado y al contrario
+                if(listadoPaquetes.get(i).getEntregado().equalsIgnoreCase(ActivityTranspor.sPendiente))
+                    ActivityTranspor.entregarPaquete(listadoPaquetes.get(i).getCodigo());
+                else
+                    ActivityTranspor.pendientePaquete(listadoPaquetes.get(i).getCodigo());
+
+                //Indicar que se han producido cambios
+                notifyDataSetChanged();
+            }
+        });
+
+        //Accion al presionar el boton borrado
+        fila.ibBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityTranspor.borrarPaquete(listadoPaquetes.get(i).getCodigo());
+            }
+        });
     }
 
     //----------------------------------------------------------------------------------------------
@@ -106,6 +134,7 @@ public class FilaPaquete extends RecyclerView.Adapter<FilaPaquete.EjemploFilaPaq
         public ImageView ivEstado;
         public TextView tvCodigo, tvNombre, tvDireccion, tvEstado;
         public LinearLayout lyAcciones, lyPaquete;
+        public ImageButton ibEstado, ibBorrar;
 
         public EjemploFilaPaquete(@NonNull View itemView) {
             super(itemView);
@@ -117,6 +146,8 @@ public class FilaPaquete extends RecyclerView.Adapter<FilaPaquete.EjemploFilaPaq
             tvEstado = (TextView) itemView.findViewById(R.id.tvEstado);
             lyAcciones = (LinearLayout) itemView.findViewById(R.id.lyAcciones);
             lyPaquete = (LinearLayout) itemView.findViewById(R.id.lyPaquete);
+            ibEstado =(ImageButton) itemView.findViewById(R.id.ibEstado);
+            ibBorrar=(ImageButton) itemView.findViewById(R.id.ibBorrar);
         }
     }
 }

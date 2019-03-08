@@ -1,19 +1,25 @@
 package com.example.rutil.sendbox;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -27,7 +33,7 @@ public class ActivityTranspor extends AppCompatActivity {
     private FirebaseUser user;
 
     // Base de datos ============================================
-    private FirebaseDatabase baseDatos;
+    private static FirebaseDatabase baseDatos;
 
     // RecyclerView =============================================
     private RecyclerView rvProductos;
@@ -35,8 +41,12 @@ public class ActivityTranspor extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutProductos;
 
     // Otros =====================================================
-    ArrayList<PaqueteDatos> paquetes;
-    FloatingActionButton bCrear;
+    private ArrayList<PaqueteDatos> paquetes;
+    private FloatingActionButton bCrear;
+    private int cGris, cVerde;
+    public static String sEntregado, sPendiente;
+    private LocalizarGPS localizarGPS;
+    private boolean permisos;
 
     //----------------------------------------------------------------------------------------------
 
@@ -48,11 +58,23 @@ public class ActivityTranspor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transpor);
+
+        //Iniciar Variables
+        cGris=ContextCompat.getColor(this, R.color.gris);
+        cVerde=ContextCompat.getColor(this, R.color.verde);
+        sEntregado=getString(R.string.estEntregado);
+        sPendiente=getString(R.string.estPendiente);
         baseDatos = FirebaseDatabase.getInstance();
+
+        //Comprobar permisos para GPS
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            }else
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+
         //Obtener el usuario logueado
         obtenerUsuario();
-        //Obtener los listados de todos los paquetes del usuario
-        obtenerPaquetes();
 
         //Iniciar variables
         rvProductos = (RecyclerView) findViewById(R.id.rvPaquetes);
@@ -121,6 +143,13 @@ public class ActivityTranspor extends AppCompatActivity {
                 //Si no se localiza el usuario se finaliza la ejecucion
                 if (user == null)
                     finish();
+                //Si se ha obtenido bien el usuario, se ejecutan el resto de metodos
+                else {
+                    //Obtener los listados de todos los paquetes del usuario
+                    obtenerPaquetes();
+                    //Activar envio ubicacion
+                    activarGPS();
+                }
             }
         };
     }
@@ -154,10 +183,14 @@ public class ActivityTranspor extends AppCompatActivity {
                                 pq.setNombre(fila.child("destinatario").getValue().toString());
                                 if (fila.child("entregado").getValue().toString().equalsIgnoreCase("si")) {
                                     pq.setImgEstado(R.drawable.listo);
-                                    pq.setEstado(getString(R.string.estEntregado));
+                                    pq.setEntregado(getString(R.string.estEntregado));
+                                    pq.setImagenButtonEstado(R.drawable.boton_pendiente);
+                                    pq.setColorEstado(cGris);
                                 } else {
                                     pq.setImgEstado(R.drawable.pendiente);
-                                    pq.setEstado(getString(R.string.estPendiente));
+                                    pq.setEntregado(getString(R.string.estPendiente));
+                                    pq.setImagenButtonEstado(R.drawable.entregado);
+                                    pq.setColorEstado(cVerde);
                                 }
 
                                 //Añadir paquete
@@ -179,4 +212,60 @@ public class ActivityTranspor extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * METODO PARA COMPROBAR SI SE HA ACEPTADO LOS PERMISOS
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch(requestCode)
+        {
+            case 1:
+                if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    permisos=true;
+                else
+                    finishAffinity();
+
+                break;
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+
+    /**
+     * METODO PARA ACTIVAR EL ENVIO DE UBICANCION GPS
+     */
+    public void activarGPS(){
+        localizarGPS = new LocalizarGPS(this, user);
+    }
+
+    /**
+     * METODO PARA MARCAR UN PAQUETE COMO ENTREGADO
+     */
+    public static void entregarPaquete(String codPaquete){
+        baseDatos.getReference("paquetes").child(codPaquete).child("entregado").setValue("si");
+    }
+
+    /**
+     * METODO PARA MARCAR UN PAQUETE COMO PENDIENTE
+     */
+    public static void pendientePaquete(String codPaquete){
+        baseDatos.getReference("paquetes").child(codPaquete).child("entregado").setValue("no");
+    }
+
+    /**
+     * METODO PARA ELIMINAR UN PAQUETE DE LA BASE DE DATOS
+     * @param codPaquete
+     */
+    public static void borrarPaquete(String codPaquete){
+        baseDatos.getReference("paquetes").child(codPaquete).removeValue();
+    }
+
+
 }
