@@ -2,6 +2,7 @@ package com.example.rutil.sendbox;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -9,19 +10,30 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuItemImpl;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -45,8 +57,11 @@ public class ActivityTranspor extends AppCompatActivity {
     private FloatingActionButton bCrear;
     private int cGris, cVerde;
     public static String sEntregado, sPendiente;
-    private LocalizarGPS localizarGPS;
-    private boolean permisos;
+    private LocalizarGPS localizarGPS= new LocalizarGPS();
+    private TextView tvNombrePer, tvDNIPer, tvMatPer;
+    private ImageView ivFotoPer;
+    private boolean creadoGPS;
+
 
     //----------------------------------------------------------------------------------------------
 
@@ -65,18 +80,12 @@ public class ActivityTranspor extends AppCompatActivity {
         sEntregado=getString(R.string.estEntregado);
         sPendiente=getString(R.string.estPendiente);
         baseDatos = FirebaseDatabase.getInstance();
-
-        //Comprobar permisos para GPS
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            }else
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
+        creadoGPS=false;
 
         //Obtener el usuario logueado
         obtenerUsuario();
 
-        //Iniciar variables
+        //Iniciar variables del listado
         rvProductos = (RecyclerView) findViewById(R.id.rvPaquetes);
         rvProductos.setHasFixedSize(true); //Indicar que el tamaño del listado no depende de los elemntos que tenga
         layoutProductos = new LinearLayoutManager(this);
@@ -111,11 +120,37 @@ public class ActivityTranspor extends AppCompatActivity {
      */
     @Override
     protected void onStop() {
-        super.onStop();
         //Quitamos el escuchador si estaba instanciado
         if (firebaseAuthListener != null) {
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
+        if(localizarGPS.lManager!=null) {
+            localizarGPS.detener();
+            Log.d("wwwww", "gpsDetenido");
+        }
+        super.onStop();
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+    @Override
+    protected void onResume() {
+        if(localizarGPS.lManager==null && creadoGPS)
+            localizarGPS.iniciar();
+        Log.d("wwwww", "gpsActivado");
+        super.onResume();
+    }
+
+
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * SOBRESCRITURA DEL METODO QUE SE EJECUTA AL PULSAR EL BOTON DE VOLVER PARA CERRAR LA APP
+     */
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+        super.onBackPressed();
     }
 
     //----------------------------------------------------------------------------------------------
@@ -147,8 +182,9 @@ public class ActivityTranspor extends AppCompatActivity {
                 else {
                     //Obtener los listados de todos los paquetes del usuario
                     obtenerPaquetes();
-                    //Activar envio ubicacion
-                    activarGPS();
+                    //Activar envio ubicacion si no esta ya creado
+                    if(!creadoGPS)
+                        activarGPS();
                 }
             }
         };
@@ -213,28 +249,6 @@ public class ActivityTranspor extends AppCompatActivity {
         });
     }
 
-    /**
-     * METODO PARA COMPROBAR SI SE HA ACEPTADO LOS PERMISOS
-     * @param requestCode
-     * @param permissions
-     * @param grantResults
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch(requestCode)
-        {
-            case 1:
-                if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    permisos=true;
-                else
-                    finishAffinity();
-
-                break;
-        }
-    }
-
     //----------------------------------------------------------------------------------------------
 
 
@@ -243,6 +257,9 @@ public class ActivityTranspor extends AppCompatActivity {
      */
     public void activarGPS(){
         localizarGPS = new LocalizarGPS(this, user);
+        localizarGPS.iniciar();
+        creadoGPS=true;
+        Log.d("wwwww", "gpsCreado");
     }
 
     /**
@@ -267,5 +284,89 @@ public class ActivityTranspor extends AppCompatActivity {
         baseDatos.getReference("paquetes").child(codPaquete).removeValue();
     }
 
+    /**
+     * METODO PARA OBTENER EL MENU DEL ACTIVITY
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_transpor, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+
+    /**
+     * METODO PARA REALIZAR ACCIONES SEGUN LA OPCION SELECCIONADA
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.iCerrarSesion:
+                if(firebaseAuth!=null)
+                    firebaseAuth.signOut(); //Cerrar la sesion
+                break;
+            case R.id.iPerfil:
+                mostrarPerfil();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    public void mostrarPerfil(){
+        //Declarar layout para establecer datos
+        LayoutInflater factory = LayoutInflater.from(this);
+        View dialog = factory.inflate(R.layout.dialogo_perfil, null);
+
+        //Obtener Referencias
+        tvNombrePer = (TextView) dialog.findViewById(R.id.tvNombrePer);
+        tvDNIPer = (TextView) dialog.findViewById(R.id.tvDNIPer);
+        tvMatPer = (TextView) dialog.findViewById(R.id.tvMatPer);
+        ivFotoPer = (ImageView) dialog.findViewById(R.id.ivFotoPer);
+        //Obtener imagen de perfil y asignarla al ImageView
+        Picasso.get().load(user.getPhotoUrl()).into(ivFotoPer);
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+        .setView(dialog)
+        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        })
+        .setCancelable(false);
+
+        //Crear dialogo del perfil
+        final AlertDialog dialogoPerfil = builder.create();
+
+        //Obtener los datos del perfil
+        final DatabaseReference refTran = baseDatos.getReference("transportistas");
+        refTran.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot fila : dataSnapshot.getChildren()){
+                    if(fila.getKey().equals(user.getUid())){
+                        tvNombrePer.setText(fila.child("nombre").getValue().toString());
+                        tvDNIPer.setText(fila.child("dni").getValue().toString());
+                        tvMatPer.setText(fila.child("matricula").getValue().toString());
+                    }
+                    //Una vez obtenidos los datos mostrar dialogo perfil
+                    dialogoPerfil.show();
+                    //Desactivar escucha de datos
+                    refTran.removeEventListener(this);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 }

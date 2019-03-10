@@ -1,12 +1,17 @@
 package com.example.rutil.sendbox;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -48,6 +53,9 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
 
     // Otros ====================================================
     private boolean adminObtenidos, transpObtenidos, iniciado;
+    public static Context context;
+    private ProgressBar pbCargando;
+
     //----------------------------------------------------------------------------------------------
 
     /**
@@ -58,9 +66,16 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+
         adminObtenidos=false;
         transpObtenidos=false;
         iniciado=false;
+        pbCargando = (ProgressBar) findViewById(R.id.pbCargando);
+        pbCargando.setVisibility(View.VISIBLE);
 
         //Referencia a la base de datos
         baseDatos = FirebaseDatabase.getInstance();
@@ -138,8 +153,10 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        //Boton Iniciar sesion, programar accion al pulsarlo
+        //Declarar boton iniciar
         signInButton = (SignInButton) findViewById(R.id.signInButton);
+
+        //Boton Iniciar sesion, programar accion al pulsarlo
         signInButton.setSize(SignInButton.SIZE_WIDE);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +174,9 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     siguienteActivity(user);
+                }else{
+                    pbCargando.setVisibility(View.GONE);
+                    signInButton.setVisibility(View.VISIBLE);
                 }
             }
         };
@@ -249,13 +269,11 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
             Log.d("Datito", "Adminnnnnnnnnnnnnnnnnnnnnnnn");
 
         }else if(transp){
-            Log.d("Datito", "Transssssssssssss");
             Intent i = new Intent(this, ActivityTranspor.class);
             startActivity(i);
 
         //En caso contrario se mostrará el activity de registro
         }else{
-            Log.d("Datito", "No registradooooooooo");
             Intent i = new Intent(this, ActivityRegistro.class);
             startActivity(i);
         }
@@ -313,7 +331,6 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
                 uidTransp=new ArrayList<String>();
                 for(DataSnapshot hijo : dataSnapshot.getChildren()) {
                     uidTransp.add(hijo.getKey());
-                    Log.d("Datito", "el bueno"+hijo.getKey());
                 }
                 transpObtenidos=true;
 
@@ -340,5 +357,21 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //Comprobar si se han iniciado los permisos
+        if(requestCode==1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //
+            } else {
+                finish();
+            }
+        }
     }
 }

@@ -101,16 +101,6 @@
                 app:srcCompat="@drawable/entregado" />
 
             <ImageButton
-                android:id="@+id/ibEditar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/black"
-                android:padding="11dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/lapiz" />
-
-            <ImageButton
                 android:id="@+id/ibBorrar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
