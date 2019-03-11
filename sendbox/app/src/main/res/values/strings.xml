@@ -21,7 +21,8 @@
     <string name="not_revoke">No se pudo revocar el acceso</string>
     <string name="not_firebase_auth">No se pudo autenticar con Firebase</string>
 
-    <string name="titRegistro">INFORMACIÓN</string>
+    <string name="titRegistro">Registro</string>
+    <string name="titAnadir">Añadir Paquete</string>
     <string name="etNombre">Nombre</string>
     <string name="etDNI">DNI</string>
     <string name="etMatricula">Matricula del vehículo</string>
@@ -51,5 +52,14 @@
     <string name="perfil">Mi Perfil</string>
 
     <string name="dniPer">DNI:</string>
-    <string name="matriculaPer">Matricula Camión:</string>
+    <string name="matriculaPer">Matricula Vehículo:</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="titMapa">Mapa</string>
+    <string name="titPaquetes">LISTADO DE PAQUETES</string>
+    <string name="titTrans">TODOS LOS TRANSPORTISTAS</string>
+    <string name="txtInfo">SendBox es una aplicación para el control diario de una empresa de reparto de mensajería.\nGracias a esta,
+        los usuarios administradores podrán conocer en todo momento donde se encuentran los diferentes
+        transportistas y el estado de los paquetes que lleva cada uno.</string>
+    <string name="nomDesarr">Aplicacion desarrollada por <b>Ángel Salas Calvo</b></string>
+    <string name="titInfo">Acerca de...</string>
 </resources>

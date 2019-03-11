@@ -1,19 +1,14 @@
 package com.example.rutil.sendbox;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuItemImpl;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,10 +16,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,9 +41,9 @@ public class ActivityTranspor extends AppCompatActivity {
     private static FirebaseDatabase baseDatos;
 
     // RecyclerView =============================================
-    private RecyclerView rvProductos;
+    private RecyclerView rvPaquetes;
     private RecyclerView.Adapter adaptador;
-    private RecyclerView.LayoutManager layoutProductos;
+    private RecyclerView.LayoutManager layoutPaquetes;
 
     // Otros =====================================================
     private ArrayList<PaqueteDatos> paquetes;
@@ -61,6 +54,7 @@ public class ActivityTranspor extends AppCompatActivity {
     private TextView tvNombrePer, tvDNIPer, tvMatPer;
     private ImageView ivFotoPer;
     private boolean creadoGPS;
+    private MediaPlayer mpBorrar, mpClic;
 
 
     //----------------------------------------------------------------------------------------------
@@ -81,14 +75,16 @@ public class ActivityTranspor extends AppCompatActivity {
         sPendiente=getString(R.string.estPendiente);
         baseDatos = FirebaseDatabase.getInstance();
         creadoGPS=false;
+        mpClic = MediaPlayer.create(this, R.raw.clic);
+        mpBorrar = MediaPlayer.create(this, R.raw.eliminar);
 
         //Obtener el usuario logueado
         obtenerUsuario();
 
         //Iniciar variables del listado
-        rvProductos = (RecyclerView) findViewById(R.id.rvPaquetes);
-        rvProductos.setHasFixedSize(true); //Indicar que el tamaño del listado no depende de los elemntos que tenga
-        layoutProductos = new LinearLayoutManager(this);
+        rvPaquetes = (RecyclerView) findViewById(R.id.rvPaquetes);
+        rvPaquetes.setHasFixedSize(true); //Indicar que el tamaño del listado no depende de los elemntos que tenga
+        layoutPaquetes = new LinearLayoutManager(this);
 
         //Poner boton flotante a la escucha
         bCrear = (FloatingActionButton) findViewById(R.id.fabCrear);
@@ -196,6 +192,7 @@ public class ActivityTranspor extends AppCompatActivity {
      * METODO PARA RELLENAR EL ARRAY DE PAQUETES CON LOS PAQUETES DEL REPARTIDOR
      */
     public void obtenerPaquetes(){
+        baseDatos.getReference("transportistas").child(user.getUid()).child("foto").setValue(user.getPhotoUrl().toString());
         baseDatos.getReference("paquetes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -237,9 +234,9 @@ public class ActivityTranspor extends AppCompatActivity {
                         }
                     }
                     //Asignar listado al recyclerview
-                    adaptador = new FilaPaquete(paquetes);
-                    rvProductos.setLayoutManager(layoutProductos);
-                    rvProductos.setAdapter(adaptador);
+                    adaptador = new FilaPaquete(paquetes, true, mpBorrar, mpClic);
+                    rvPaquetes.setLayoutManager(layoutPaquetes);
+                    rvPaquetes.setAdapter(adaptador);
                 }
             }
 
@@ -311,6 +308,9 @@ public class ActivityTranspor extends AppCompatActivity {
             case R.id.iPerfil:
                 mostrarPerfil();
                 break;
+            case R.id.iAcercaT:
+                Intent intentInfo = new Intent(this, ActivityInfo.class);
+                startActivity(intentInfo);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -55,6 +56,7 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
     private boolean adminObtenidos, transpObtenidos, iniciado;
     public static Context context;
     private ProgressBar pbCargando;
+    private MediaPlayer mpLogin;
 
     //----------------------------------------------------------------------------------------------
 
@@ -74,6 +76,7 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
         adminObtenidos=false;
         transpObtenidos=false;
         iniciado=false;
+        mpLogin = MediaPlayer.create(this, R.raw.login);
         pbCargando = (ProgressBar) findViewById(R.id.pbCargando);
         pbCargando.setVisibility(View.VISIBLE);
 
@@ -195,6 +198,8 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        pbCargando.setVisibility(View.VISIBLE);
+        signInButton.setVisibility(View.GONE);
         //Se comprueba si se ha obtenido el codigo enviado satisfactoriamente (requestCode)
         if (requestCode == SIGN_IN_CODE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -253,20 +258,20 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
             if(user.getUid().equals(uidAdmins.get(i)))
                 admin=true;
         }
-        Log.d("Datito", "Tamano "+uidTransp.size());
         //Si no es administrador comprobar si esta registrado como transportista
         if(!admin){
-            Log.d("Datito", "Tamano "+uidTransp.size());
             for(int i=0; i<uidTransp.size();i++){
-                Log.d("Datito", "-> "+user.getUid());
                 if(user.getUid().equals(uidTransp.get(i)))
                     transp=true;
             }
         }
 
+        //Reproducir sonido
+        mpLogin.start();
         //Iniciar activity segun el tipo de usuario
         if(admin){
-            Log.d("Datito", "Adminnnnnnnnnnnnnnnnnnnnnnnn");
+            Intent i = new Intent(this, ActivityAdmin.class);
+            startActivity(i);
 
         }else if(transp){
             Intent i = new Intent(this, ActivityTranspor.class);

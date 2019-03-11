@@ -192,6 +192,8 @@ public class ActivityRegistro extends AppCompatActivity{
                     DatabaseReference administradores = baseDatos.getReference("administradores");
                     administradores.child(uid).setValue(etNombre.getText().toString());
                     //Cargar Activity
+                    Intent i = new Intent(this, ActivityAdmin.class);
+                    startActivity(i);
                 }else
                     tvError.setText(getString(R.string.errValidacion));
             }
@@ -207,11 +209,11 @@ public class ActivityRegistro extends AppCompatActivity{
                 tvError.setText(getString(R.string.errMatricula));
             //Si se han introducido todos los datos, se almacenan
             else{
-                Log.d("reggg", "aqui");
                 DatabaseReference refTransp = baseDatos.getReference("transportistas/"+uid);
                 refTransp.child("dni").setValue(etDNI.getText().toString());
                 refTransp.child("matricula").setValue(etMatricula.getText().toString());
                 refTransp.child("nombre").setValue(etNombre.getText().toString());
+                refTransp.child("foto").setValue(user.getPhotoUrl());
                 refTransp.child("ubicacion/lat").setValue("null");
                 refTransp.child("ubicacion/long").setValue("null");
 

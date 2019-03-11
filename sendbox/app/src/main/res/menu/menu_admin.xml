@@ -3,12 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/iPerfil"
-        android:title="@string/perfil" />
-    <item
-        android:id="@+id/iAcercaT"
+        android:id="@+id/iAcerca"
         android:title="@string/titInfo" />
     <item
-        android:id="@+id/iCerrarSesion"
+        android:id="@+id/iMapa"
+        android:icon="@drawable/mapa"
+        android:title="@string/titMapa"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/iCerrarSesionAdmin"
         android:title="@string/cerrarSesion" />
 </menu>

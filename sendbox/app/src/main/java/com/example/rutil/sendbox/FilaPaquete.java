@@ -2,6 +2,7 @@ package com.example.rutil.sendbox;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -16,15 +17,19 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class FilaPaquete extends RecyclerView.Adapter<FilaPaquete.EjemploFilaPaquete> {
-    ArrayList<PaqueteDatos> listadoPaquetes;
-
+    private ArrayList<PaqueteDatos> listadoPaquetes;
+    private boolean editar;
+    private MediaPlayer mpBorrar, mpClic;
 
     /**
      * CONSTRUCTOR PARAMETRIZADO
      * @param lp
      */
-    public FilaPaquete(ArrayList<PaqueteDatos> lp){
+    public FilaPaquete(ArrayList<PaqueteDatos> lp, boolean editar, MediaPlayer mpBorrar, MediaPlayer mpClic){
         listadoPaquetes=lp;
+        this.editar=editar;
+        this.mpBorrar=mpBorrar;
+        this.mpClic=mpClic;
     }
 
     //----------------------------------------------------------------------------------------------
@@ -38,7 +43,7 @@ public class FilaPaquete extends RecyclerView.Adapter<FilaPaquete.EjemploFilaPaq
     @NonNull
     @Override
     public EjemploFilaPaquete onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        //Crear la vista con el layout correspondiente a la plantilla de productos
+        //Crear la vista con el layout correspondiente a la plantilla de paquete
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.paquete, viewGroup, false);
         //Crear objeto de tipo viewHolder de la clase interna con la vista creada anteriormente
         EjemploFilaPaquete ejemplo = new EjemploFilaPaquete(view);
@@ -64,54 +69,61 @@ public class FilaPaquete extends RecyclerView.Adapter<FilaPaquete.EjemploFilaPaq
         fila.ivEstado.setImageResource(listadoPaquetes.get(i).getImgEstado());
         fila.ibEstado.setImageResource(listadoPaquetes.get(i).getImagenButtonEstado());
         fila.ibEstado.setBackgroundColor(listadoPaquetes.get(i).getColorEstado());
-
-        //Accion al presionar la fila
-        fila.lyPaquete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Ocultar las opciones de todos los elementos
-                for(int j = 0; j<listadoPaquetes.size(); j++){
-                    if(i!=j)
-                    listadoPaquetes.get(j).setMostrarOp(false);
+        //Si se puede editar activamos los botones
+        if(editar) {
+            //Accion al presionar la fila
+            fila.lyPaquete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Ocultar las opciones de todos los elementos
+                    for (int j = 0; j < listadoPaquetes.size(); j++) {
+                        if (i != j)
+                            listadoPaquetes.get(j).setMostrarOp(false);
+                    }
+                    //En funcion de como este el menu se oculta o se muestra
+                    if (listadoPaquetes.get(i).isMostrarOp())
+                        listadoPaquetes.get(i).setMostrarOp(false);
+                    else
+                        listadoPaquetes.get(i).setMostrarOp(true);
+                    //Indicar que se han producido cambios
+                    notifyDataSetChanged();
                 }
-                //En funcion de como este el menu se oculta o se muestra
-                if(listadoPaquetes.get(i).isMostrarOp())
-                    listadoPaquetes.get(i).setMostrarOp(false);
-                else
-                    listadoPaquetes.get(i).setMostrarOp(true);
-                //Indicar que se han producido cambios
-                notifyDataSetChanged();
-            }
-        });
+            });
 
-        //Mostrar opciones si esta activo
-        if(listadoPaquetes.get(i).isMostrarOp())
-            fila.lyAcciones.setVisibility(View.VISIBLE);
-        else
+            //Mostrar opciones si esta activo
+            if (listadoPaquetes.get(i).isMostrarOp())
+                fila.lyAcciones.setVisibility(View.VISIBLE);
+            else
+                fila.lyAcciones.setVisibility(View.GONE);
+
+            //Accion al presionar el boton estado
+            fila.ibEstado.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Reproducir sonido
+                    mpClic.start();
+                    //Si el paquete no esta entregado se marca como entregado y al contrario
+                    if (listadoPaquetes.get(i).getEntregado().equalsIgnoreCase(ActivityTranspor.sPendiente))
+                        ActivityTranspor.entregarPaquete(listadoPaquetes.get(i).getCodigo());
+                    else
+                        ActivityTranspor.pendientePaquete(listadoPaquetes.get(i).getCodigo());
+
+                    //Indicar que se han producido cambios
+                    notifyDataSetChanged();
+                }
+            });
+
+            //Accion al presionar el boton borrado
+            fila.ibBorrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mpBorrar.start();
+                    ActivityTranspor.borrarPaquete(listadoPaquetes.get(i).getCodigo());
+                }
+            });
+        }else{
             fila.lyAcciones.setVisibility(View.GONE);
-
-        //Accion al presionar el boton estado
-        fila.ibEstado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Si el paquete no esta entregado se marca como entregado y al contrario
-                if(listadoPaquetes.get(i).getEntregado().equalsIgnoreCase(ActivityTranspor.sPendiente))
-                    ActivityTranspor.entregarPaquete(listadoPaquetes.get(i).getCodigo());
-                else
-                    ActivityTranspor.pendientePaquete(listadoPaquetes.get(i).getCodigo());
-
-                //Indicar que se han producido cambios
-                notifyDataSetChanged();
-            }
-        });
-
-        //Accion al presionar el boton borrado
-        fila.ibBorrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ActivityTranspor.borrarPaquete(listadoPaquetes.get(i).getCodigo());
-            }
-        });
+        }
     }
 
     //----------------------------------------------------------------------------------------------

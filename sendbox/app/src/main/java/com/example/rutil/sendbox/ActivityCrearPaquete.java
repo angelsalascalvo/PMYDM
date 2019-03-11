@@ -131,7 +131,7 @@ public class ActivityCrearPaquete extends AppCompatActivity {
             //Guardar datos
             DatabaseReference pq = baseDatos.getReference("paquetes").child(etCodigo.getText().toString());
             pq.child("destinatario").setValue(etNombreDest.getText().toString());
-            pq.child("direccion").setValue(etNombreDest.getText().toString());
+            pq.child("direccion").setValue(etDireccion.getText().toString());
             pq.child("entregado").setValue("no");
             pq.child("transportista").setValue(user.getUid());
 
