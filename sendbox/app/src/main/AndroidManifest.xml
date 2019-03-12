@@ -30,14 +30,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityTranspor"
+            android:name=".Transportista.ActivityTranspor"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityRegistro"
+            android:name=".administrador.ActivityRegistro"
             android:label="@string/titRegistro"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityCrearPaquete"
+            android:name=".Transportista.ActivityCrearPaquete"
             android:label="@string/titAnadir"
             android:screenOrientation="portrait" />
         <!--
@@ -53,18 +53,18 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".administrador.MapsActivity"
             android:label="@string/title_activity_maps"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityAdmin"
+            android:name=".administrador.ActivityAdmin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityUsuarioInfo"
+            android:name=".administrador.ActivityUsuarioInfo"
             android:screenOrientation="portrait" />
         <activity android:name=".ActivityInfo"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ActivityScanner"
+        <activity android:name=".Transportista.ActivityScanner"
             android:screenOrientation="portrait"
             android:label="@string/titScanner"></activity>
     </application>

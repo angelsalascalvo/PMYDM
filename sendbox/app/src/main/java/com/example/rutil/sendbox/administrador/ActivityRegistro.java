@@ -1,4 +1,4 @@
-package com.example.rutil.sendbox;
+package com.example.rutil.sendbox.administrador;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,6 +9,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.rutil.sendbox.Transportista.ActivityTranspor;
+import com.example.rutil.sendbox.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

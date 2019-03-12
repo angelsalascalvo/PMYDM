@@ -1,4 +1,4 @@
-package com.example.rutil.sendbox;
+package com.example.rutil.sendbox.administrador;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import com.example.rutil.sendbox.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

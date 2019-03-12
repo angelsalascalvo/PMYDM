@@ -1,8 +1,10 @@
-package com.example.rutil.sendbox;
+package com.example.rutil.sendbox.Transportista;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.rutil.sendbox.R;
 import com.google.zxing.Result;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -22,6 +24,8 @@ public class ActivityScanner extends AppCompatActivity implements ZXingScannerVi
         scanner = new ZXingScannerView(getApplicationContext());
         setContentView(scanner);
         scanner.setResultHandler(this);
+        scanner.setAutoFocus(true);
+        scanner.setAspectTolerance(0.5f);
         //Iniciar la camara
         scanner.startCamera();
     }

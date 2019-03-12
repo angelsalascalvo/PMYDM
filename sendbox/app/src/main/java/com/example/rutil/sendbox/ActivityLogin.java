@@ -9,9 +9,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import com.example.rutil.sendbox.Transportista.ActivityTranspor;
+import com.example.rutil.sendbox.administrador.ActivityAdmin;
+import com.example.rutil.sendbox.administrador.ActivityRegistro;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -137,6 +141,7 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
         //Si no esta logueado, se abre el inicio de sesion con google (seleccion de cuenta)
         else{
             inicioSesion();
+            Log.d("eoee","ee");
         }
     }
 
@@ -146,7 +151,6 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
      * METODO PARA INICIALIZAR Y LLAMAR ABRIR EL DIALOGO DE SELECCION DE CUENTAS DE GOOGLE PARA EL LOGUEO
      */
     public void inicioSesion(){
-
         //Ajustes de la ventana de inicio de sesion propia de google
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -166,6 +170,8 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pbCargando.setVisibility(View.VISIBLE);
+                signInButton.setVisibility(View.GONE);
                 //Abrir el intent correspondiente con la ventana de inicio de sesion para seleccionar correo
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
                 startActivityForResult(intent, SIGN_IN_CODE);
@@ -220,6 +226,8 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
             firebaseAuthWithGoogle(result.getSignInAccount());
         } else {
             Toast.makeText(this, R.string.not_log_in, Toast.LENGTH_SHORT).show();
+            pbCargando.setVisibility(View.GONE);
+            signInButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -235,7 +243,6 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
                 if (!task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), R.string.not_firebase_auth, Toast.LENGTH_SHORT).show();
                 }

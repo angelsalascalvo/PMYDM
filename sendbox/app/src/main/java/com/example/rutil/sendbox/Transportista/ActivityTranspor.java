@@ -1,4 +1,4 @@
-package com.example.rutil.sendbox;
+package com.example.rutil.sendbox.Transportista;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,13 +11,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.rutil.sendbox.ActivityInfo;
+import com.example.rutil.sendbox.ActivityLogin;
+import com.example.rutil.sendbox.R;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +40,7 @@ public class ActivityTranspor extends AppCompatActivity {
 
     // Autenticacion ============================================
     private FirebaseAuth firebaseAuth;
+    private GoogleApiClient googleApiClient;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private FirebaseUser user;
 
@@ -167,6 +175,21 @@ public class ActivityTranspor extends AppCompatActivity {
      * METODO PARA OBTENER EL OBJETO USUARIO DE FIREBASE QUE REFERENCIA AL USUARIO
      */
     public void obtenerUsuario(){
+        //Obtener objeto para cerrar sesion
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+                    }
+                })
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -312,6 +335,7 @@ public class ActivityTranspor extends AppCompatActivity {
             case R.id.iCerrarSesion:
                 if(firebaseAuth!=null)
                     firebaseAuth.signOut(); //Cerrar la sesion
+                    Auth.GoogleSignInApi.signOut(googleApiClient);
                 break;
             case R.id.iPerfil:
                 mostrarPerfil();

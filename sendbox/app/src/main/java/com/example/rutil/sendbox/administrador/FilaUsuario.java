@@ -1,4 +1,4 @@
-package com.example.rutil.sendbox;
+package com.example.rutil.sendbox.administrador;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.rutil.sendbox.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.rutil.sendbox;
+package com.example.rutil.sendbox.Transportista;
 
 public class PaqueteDatos {
     private int imgEstado;

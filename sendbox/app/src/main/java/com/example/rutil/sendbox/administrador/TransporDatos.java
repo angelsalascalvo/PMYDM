@@ -1,4 +1,4 @@
-package com.example.rutil.sendbox;
+package com.example.rutil.sendbox.administrador;
 
 public class TransporDatos {
     private String nombre;
