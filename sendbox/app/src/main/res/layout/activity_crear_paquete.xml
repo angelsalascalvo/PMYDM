@@ -20,20 +20,44 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Errores" />
 
-    <EditText
-        android:id="@+id/etCodigoCp"
+    <LinearLayout
+        android:id="@+id/lyCodigo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:hint="@string/pqCodigo"
-        android:inputType="textPersonName"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/etCodigoCp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/pqCodigo"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ibCodigoB"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="5"
+            android:background="@drawable/boton_secundario"
+            android:onClick="leerCodigo"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/codigo" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/etNombreDestCp"
@@ -48,13 +72,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCodigoCp" />
+        app:layout_constraintTop_toBottomOf="@+id/lyCodigo" />
 
     <EditText
         android:id="@+id/etDireccionCp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:hint="@string/pqDireccion"
@@ -109,4 +134,5 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="417dp" />
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

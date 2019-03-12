@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -56,7 +55,6 @@ public class ActivityTranspor extends AppCompatActivity {
     private boolean creadoGPS;
     private MediaPlayer mpBorrar, mpClic;
 
-
     //----------------------------------------------------------------------------------------------
 
     /**
@@ -93,7 +91,6 @@ public class ActivityTranspor extends AppCompatActivity {
                 crearClic();
             }
         });
-
     }
 
     //----------------------------------------------------------------------------------------------
@@ -120,23 +117,27 @@ public class ActivityTranspor extends AppCompatActivity {
         if (firebaseAuthListener != null) {
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
+        /**
+         * Si el gps esta activado se detiene
+         */
         if(localizarGPS.lManager!=null) {
             localizarGPS.detener();
-            Log.d("wwwww", "gpsDetenido");
         }
         super.onStop();
     }
 
     //----------------------------------------------------------------------------------------------
 
+    /**
+     * SOBRESCRITURA DEL METODO ONRESUME
+     */
     @Override
     protected void onResume() {
+        //Si el GPS esta creado y detenido se inicia
         if(localizarGPS.lManager==null && creadoGPS)
             localizarGPS.iniciar();
-        Log.d("wwwww", "gpsActivado");
         super.onResume();
     }
-
 
     //----------------------------------------------------------------------------------------------
 
@@ -145,7 +146,7 @@ public class ActivityTranspor extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
-        finishAffinity();
+        finishAffinity(); //Cerrar activity
         super.onBackPressed();
     }
 
@@ -248,7 +249,6 @@ public class ActivityTranspor extends AppCompatActivity {
 
     //----------------------------------------------------------------------------------------------
 
-
     /**
      * METODO PARA ACTIVAR EL ENVIO DE UBICANCION GPS
      */
@@ -256,8 +256,9 @@ public class ActivityTranspor extends AppCompatActivity {
         localizarGPS = new LocalizarGPS(this, user);
         localizarGPS.iniciar();
         creadoGPS=true;
-        Log.d("wwwww", "gpsCreado");
     }
+
+    //----------------------------------------------------------------------------------------------
 
     /**
      * METODO PARA MARCAR UN PAQUETE COMO ENTREGADO
@@ -266,12 +267,16 @@ public class ActivityTranspor extends AppCompatActivity {
         baseDatos.getReference("paquetes").child(codPaquete).child("entregado").setValue("si");
     }
 
+    //----------------------------------------------------------------------------------------------
+
     /**
      * METODO PARA MARCAR UN PAQUETE COMO PENDIENTE
      */
     public static void pendientePaquete(String codPaquete){
         baseDatos.getReference("paquetes").child(codPaquete).child("entregado").setValue("no");
     }
+
+    //----------------------------------------------------------------------------------------------
 
     /**
      * METODO PARA ELIMINAR UN PAQUETE DE LA BASE DE DATOS
@@ -280,6 +285,8 @@ public class ActivityTranspor extends AppCompatActivity {
     public static void borrarPaquete(String codPaquete){
         baseDatos.getReference("paquetes").child(codPaquete).removeValue();
     }
+
+    //----------------------------------------------------------------------------------------------
 
     /**
      * METODO PARA OBTENER EL MENU DEL ACTIVITY
@@ -292,6 +299,7 @@ public class ActivityTranspor extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //----------------------------------------------------------------------------------------------
 
     /**
      * METODO PARA REALIZAR ACCIONES SEGUN LA OPCION SELECCIONADA
@@ -315,8 +323,11 @@ public class ActivityTranspor extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //----------------------------------------------------------------------------------------------
 
-
+    /**
+     * METODO PARA LANZAR EL CUADRO DE DIALOGO CON LA INFORMACION DE PERFIL
+     */
     public void mostrarPerfil(){
         //Declarar layout para establecer datos
         LayoutInflater factory = LayoutInflater.from(this);
@@ -330,7 +341,7 @@ public class ActivityTranspor extends AppCompatActivity {
         //Obtener imagen de perfil y asignarla al ImageView
         Picasso.get().load(user.getPhotoUrl()).into(ivFotoPer);
 
-
+        //Crear cuadro de dialogo
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
         .setView(dialog)
         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -339,8 +350,6 @@ public class ActivityTranspor extends AppCompatActivity {
             }
         })
         .setCancelable(false);
-
-        //Crear dialogo del perfil
         final AlertDialog dialogoPerfil = builder.create();
 
         //Obtener los datos del perfil
@@ -367,6 +376,5 @@ public class ActivityTranspor extends AppCompatActivity {
 
             }
         });
-
     }
 }

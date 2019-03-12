@@ -5,12 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -34,8 +32,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -69,10 +65,18 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //Comprobar permisos
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, 1);
+        }
 
+        //Iniciar variables
         adminObtenidos=false;
         transpObtenidos=false;
         iniciado=false;
@@ -89,8 +93,6 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
         // Llamada a los metodos para obtener los diferentes usuarios
         obtenerAdministradores();
         obtenerTransportistas();
-
-
     }
 
     //----------------------------------------------------------------------------------------------
@@ -183,7 +185,6 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
                 }
             }
         };
-
         firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
@@ -366,16 +367,21 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
 
     //----------------------------------------------------------------------------------------------
 
-
+    /**
+     * METODO PARA OBTENER LA RESPUESTA A LA SOLICITUD DE PERMISOS
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        //Comprobar si se han iniciado los permisos
+        //Comprobar si se han aceptado los permisos
         if(requestCode==1) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //
+
             } else {
-                finish();
+                finish(); //Finalizar ejecucion si no se aceptan
             }
         }
     }

@@ -8,6 +8,10 @@ import android.webkit.WebViewClient;
 public class ActivityInfo extends AppCompatActivity {
     private WebView wvInfo;
 
+    /**
+     * SOBRECRITURA DEL METODO ON CREATE
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

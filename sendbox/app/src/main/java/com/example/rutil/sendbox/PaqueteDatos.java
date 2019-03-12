@@ -10,11 +10,15 @@ public class PaqueteDatos {
     private int colorEstado;
     private int imagenButtonEstado;
 
+    //----------------------------------------------------------------------------------------------
+
     /**
      * CONSTRUCTOR POR DEFECTO
      */
     public PaqueteDatos(){
     }
+
+    //----------------------------------------------------------------------------------------------
 
     /**
      * CONSTRUCTOR PARAMETRIZADO

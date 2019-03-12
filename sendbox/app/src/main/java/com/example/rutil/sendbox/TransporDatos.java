@@ -7,8 +7,17 @@ public class TransporDatos {
     private String matricula;
     private String uid;
 
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * CONSTRUCTOR POR DEFECTO
+     */
     public TransporDatos() {
     }
+
+    //----------------------------------------------------------------------------------------------
+
+    //METODOS GET AND SET
 
     public String getNombre() {
         return nombre;

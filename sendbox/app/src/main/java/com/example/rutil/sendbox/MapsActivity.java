@@ -1,22 +1,15 @@
 package com.example.rutil.sendbox;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -33,10 +26,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // Base de datos ============================================
     private static FirebaseDatabase baseDatos;
 
+    // Otros ====================================================
     private GoogleMap mMap;
     private ArrayList<Marker> marcadores = new ArrayList<Marker>();
     private ArrayList<String> transportistas = new ArrayList<String>();
 
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * SOBRESCRITURA DEL METODO ON CREATE
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +50,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
 
     /**
      * Manipulates the map once available.
@@ -72,6 +71,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnInfoWindowClickListener(this);
     }
 
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * METODO PARA COLOCAR LOS MARCADORES DE LOS TRANSPORTISTAS CONECTADOS
+     */
     public void obtenerTransportistas(){
         final DatabaseReference transport = baseDatos.getReference("transportistas");
         transport.addValueEventListener(new ValueEventListener() {

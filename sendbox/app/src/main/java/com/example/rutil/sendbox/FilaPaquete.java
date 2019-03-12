@@ -1,10 +1,7 @@
 package com.example.rutil.sendbox;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +10,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 public class FilaPaquete extends RecyclerView.Adapter<FilaPaquete.EjemploFilaPaquete> {

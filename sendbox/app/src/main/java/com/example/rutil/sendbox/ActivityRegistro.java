@@ -1,11 +1,9 @@
 package com.example.rutil.sendbox;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -29,7 +27,6 @@ public class ActivityRegistro extends AppCompatActivity{
 
     // Base de datos ============================================
     private FirebaseDatabase baseDatos;
-
 
     // Vista ====================================================
     private EditText etNombre, etDNI, etMatricula, etValidacion;
@@ -87,7 +84,7 @@ public class ActivityRegistro extends AppCompatActivity{
     //----------------------------------------------------------------------------------------------
 
     /**
-     * METODO PARA INICIAR TODOS LOS ELENTOS NECESARIOS
+     * METODO PARA INICIAR TODOS LOS ELEMENTOS NECESARIOS
      */
     public void inicio(){
         etNombre = (EditText) findViewById(R.id.etNombre);
@@ -213,7 +210,7 @@ public class ActivityRegistro extends AppCompatActivity{
                 refTransp.child("dni").setValue(etDNI.getText().toString());
                 refTransp.child("matricula").setValue(etMatricula.getText().toString());
                 refTransp.child("nombre").setValue(etNombre.getText().toString());
-                refTransp.child("foto").setValue(user.getPhotoUrl());
+                refTransp.child("foto").setValue(user.getPhotoUrl().toString());
                 refTransp.child("ubicacion/lat").setValue("null");
                 refTransp.child("ubicacion/long").setValue("null");
 

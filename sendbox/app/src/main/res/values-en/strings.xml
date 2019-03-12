@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">SendBox</string>
+    <string name="title_activity_login">Log in</string>
+
+    <string name="not_log_in">Unable to log in</string>
+    <string name="log_out">Log Out</string>
+    <string name="revoke">Revoke</string>
+    <string name="not_close_session">Unable to log out</string>
+    <string name="not_revoke">Unable to revoke access</string>
+    <string name="not_firebase_auth">Unable to authenticate with firebase</string>
+
+    <string name="titRegistro">Sign up</string>
+    <string name="titAnadir">Add Package</string>
+    <string name="titScanner">Scan code</string>
+    <string name="etNombre">Name</string>
+    <string name="etDNI">DNI</string>
+    <string name="etMatricula">Vehicle number plate</string>
+    <string name="bAceptar">Accept</string>
+    <string name="bCancelar">Cancel</string>
+    <string name="etCodigo">Validation code</string>
+    <string name="txtAdmin">I\'m an administrator</string>
+
+    <string name="errNombre">The name field can not be empty.</string>
+    <string name="errDNI">The DNI field can not be empty.</string>
+    <string name="errMatricula">The vehicle number plate field can not be empty.</string>
+    <string name="errValidacion">Error in validation code.</string>
+    <string name="errCampos">You must fill all the fields.</string>
+    <string name="errDuplicado">Code already existing in the database.</string>
+    <string name="estEntregado">Delivered</string>
+    <string name="estPendiente">Pending</string>
+
+    <string name="pqCodigo">Package Code</string>
+    <string name="pqNombre">Receiver name</string>
+    <string name="pqDireccion">Delivery address</string>
+    <string name="bAnadir">Add</string>
+    <string name="bDescartar">Discard</string>
+    <string name="guardado">Saved package</string>
+    <string name="txtGPS">You must activate the GPS ...</string>
+
+    <string name="cerrarSesion">Log out</string>
+    <string name="perfil">My profile</string>
+
+    <string name="dniPer">DNI:</string>
+    <string name="matriculaPer">Vehicle plate:</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="titMapa">Map</string>
+    <string name="titPaquetes">PACKAGE LIST</string>
+    <string name="titTrans">ALL TRANSPORTERS</string>
+    <string name="txtInfo">SendBox is an application for the daily control of a courier delivery company.
+        \nThanks to this, the administrators users will be able to know at all times where the different
+        transporters and the status of the packages each one carries.</string>
+    <string name="nomDesarr">Application developed by <b>Ángel Salas Calvo</b></string>
+    <string name="titInfo">About...</string>
+</resources>

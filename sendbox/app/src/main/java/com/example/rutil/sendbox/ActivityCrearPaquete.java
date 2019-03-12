@@ -1,5 +1,6 @@
 package com.example.rutil.sendbox;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -17,8 +17,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class ActivityCrearPaquete extends AppCompatActivity {
+public class ActivityCrearPaquete extends AppCompatActivity{
 
     // Autenticacion ============================================
     private FirebaseAuth firebaseAuth;
@@ -33,9 +34,17 @@ public class ActivityCrearPaquete extends AppCompatActivity {
     private TextView tvError;
     private boolean valido;
     private Button bAnadir;
+    private ZXingScannerView scanner;
+    public static final String CODIGO_BARRAS = "codBarras";
+    public static final int CODIGO_RESPUESTA =1234;
+
 
     //----------------------------------------------------------------------------------------------
 
+    /**
+     * SOBRESCRITURA DEL METODO ON CREATE
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,13 +130,14 @@ public class ActivityCrearPaquete extends AppCompatActivity {
         }
     }
 
+    //----------------------------------------------------------------------------------------------
+
     /**
      * METODO PARA ALMACENAR LOS DATOS SI ES UN CODIGO VALIDO
      */
     public void guardarDatos(){
         //Si es valido el codigo actuamos
         if (valido) {
-            Log.d("Valido", "v"+ valido);
             //Guardar datos
             DatabaseReference pq = baseDatos.getReference("paquetes").child(etCodigo.getText().toString());
             pq.child("destinatario").setValue(etNombreDest.getText().toString());
@@ -168,5 +178,33 @@ public class ActivityCrearPaquete extends AppCompatActivity {
                     finish();
             }
         };
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * METODO QUE SE EJECUTARÁ AL PULSAR EL BOTON DE CODIGO DE BARRAS
+     * Abrirña la vista que permitirá escanear el codigo de barras
+     * @param view
+     */
+    public void leerCodigo(View view){
+        Intent i = new Intent(this, ActivityScanner.class);
+        startActivityForResult(i, CODIGO_RESPUESTA);
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * METODO PARA OBTENER EL CODIGO LEIDO CON EL LECTOR
+     * @param reqCode
+     * @param resCode
+     * @param datos
+     */
+    public void onActivityResult(int reqCode, int resCode, Intent datos){
+        if(reqCode== CODIGO_RESPUESTA && resCode==RESULT_OK){
+            //Establecer codigo en el cuadro de texto
+            etCodigo.setText(datos.getStringExtra(CODIGO_BARRAS));
+        }
+        super.onActivityResult(reqCode, resCode, datos);
     }
 }

@@ -1,9 +1,7 @@
 package com.example.rutil.sendbox;
 
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +44,12 @@ public class ActivityUsuarioInfo extends AppCompatActivity {
     private ImageView ivFoto;
     private MediaPlayer mpBorrar, mpClic;
 
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * SOBRESCRITURA DEL METODO ON CREATE
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,23 +62,20 @@ public class ActivityUsuarioInfo extends AppCompatActivity {
         mpClic = MediaPlayer.create(this, R.raw.clic);
         mpBorrar = MediaPlayer.create(this, R.raw.eliminar);
 
-
         //Obtener UID del usuario solicitado
         uid = getIntent().getStringExtra("uid");
 
         //Obtener el usuario logueado
         obtenerUsuario();
 
+        //Iniciar variables del listado
         baseDatos = FirebaseDatabase.getInstance();
         cGris=ContextCompat.getColor(this, R.color.gris);
         cVerde=ContextCompat.getColor(this, R.color.verde);
-
-        //Iniciar variables del listado
         rvPaquetesUsu = (RecyclerView) findViewById(R.id.rvPaquetesUsu);
         rvPaquetesUsu.setHasFixedSize(true);
         layoutPaqUsuarios = new LinearLayoutManager(this);
     }
-
 
     //----------------------------------------------------------------------------------------------
 
@@ -183,14 +183,11 @@ public class ActivityUsuarioInfo extends AppCompatActivity {
                     //Recorrer cada uno de los paquetes del grupo paquetes
                     for(DataSnapshot fila : dataSnapshot.getChildren()){
                         try {
-
-
                             //Obtener el valor del transportista que lo reparte
                             String t = fila.child("transportista").getValue().toString();
 
                             //Si el paquete es de ese transportista, se almacena en el array
                             if (t.equals(uid)) {
-                                Log.d("logig", t);
                                 //Crear objeto con los datos del paquete
                                 PaqueteDatos pq = new PaqueteDatos();
                                 pq.setCodigo(fila.getKey());
